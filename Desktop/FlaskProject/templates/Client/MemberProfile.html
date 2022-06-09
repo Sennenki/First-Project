@@ -1,0 +1,159 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong> Please try again.
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+{% endfor %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/UserProfile.css')}}">
+<div class="get_back"><a href="{{url_for('Member', input=current_user.email)}}" class="Link"><- Go back</a></div>
+<div class="user_info">
+    {% if current_user.file %}
+        <img src="{{url_for('static', filename='Product_IMG/' + current_user.file)}}" alt="Profile">
+    {% else %}
+        <img src="{{url_for('static', filename='reference/user.svg')}}" alt="Profile">
+    {% endif %}
+    <h2>{{current_user.fname}} {{current_user.lname}}</h2> 
+</div>
+<div class="personal_info">
+    <div class="title">Basic Info</div>
+    <div class="component">
+        <form action="{{url_for('EditProfileIMG', input=current_user.id)}}" method="POST" enctype="multipart/form-data">
+            {{updateProfile.hidden_tag()}}
+            {{updateProfile.file(class="Img_btn", id="newPic")}}
+            <label for="newPic" class="user_btn_label">
+                Change Profile
+            </label>
+            {{updateProfile.submit(value="Confirm", class="load_btn")}}
+            <div class="load_btn_cancel">
+                Cancel
+            </div>
+        </form>
+        <form action="{{url_for('EditLocation', input=current_user.id)}}" method="POST">
+            {{updateLocation.hidden_tag()}}
+            <div class="user_btn_label" id="change_info")>
+                Change Info
+            </div>
+            <div class="change_info">
+                <div class="sec_email">
+                    {{updateLocation.email.label(class="label")}}
+                    {{updateLocation.email(class="text_form_input", value=identity.email)}}
+                </div>
+                <div class="sec_name">
+                    {{updateLocation.fname.label(class="label")}}
+                    {{updateLocation.fname(class="text_form_input", value=fname)}}
+                    <div class="sub_sec1">
+                        {{updateLocation.lname.label(class="label")}}
+                        {{updateLocation.lname(class="text_form_input", value=lname)}}
+                    </div>
+                </div>
+                <div class="sec_add">
+                    {{updateLocation.address.label(class="label")}}
+                    {{updateLocation.address(class="text_form_address", value=identity.address)}}
+                </div>
+                <div class="scope_1">
+                    {{updateLocation.province.label(class="label")}}
+                    {{updateLocation.province(class="text_form_select", id="province")}}
+                    <div class="sub_sec2">
+                        {{updateLocation.district.label(class="label")}}
+                        {{updateLocation.district(class="text_form_select", id="district")}}
+                    </div>
+                </div>
+                <div class="scope_2">
+                    {{updateLocation.subDistrict.label(class="label")}}
+                    {{updateLocation.subDistrict(class="text_form_select", id="subDistrict")}}
+                    <div class="sub_sec3">
+                        {{updateLocation.postcode.label(class="label")}}
+                        {{updateLocation.postcode(class="text_form_post",maxlength=5, value=identity.postCode)}}
+                    </div>
+                </div>
+                <div class="sec_phone">
+                    {{updateLocation.telNumber.label(class="label")}}
+                    {{updateLocation.telNumber(class="text_form_input",maxlength=10, value=identity.telephone)}}
+                </div>
+                {{updateLocation.submit(class="submit_btn", value="Submit")}}
+                <label id="back" class="submit_btn">
+                    Cancel
+                </label>
+            </div>
+        </form>
+        <form action="{{url_for('RePassword', input=current_user.id)}}" method="POST">
+            {{updatePassword.hidden_tag()}}
+            <div class="user_btn_label" id="renew">
+                Change Password 
+            </div>
+            <div class="change_password">
+                <div class="title">Change Your Password</div>
+                <div class="input_password">
+                    {{updatePassword.password.label(class="label")}}
+                    {{updatePassword.password(class="text_form_input")}}
+                    <img class="eye" src="{{url_for('static', filename='reference/eye_icon.svg')}}" alt="eye">
+                    <p class="show_password"></p>
+                </div>
+                <div class="input_password">
+                    {{updatePassword.conpassword.label(class="label")}}
+                    {{updatePassword.conpassword(class="text_form_input", id="new_password")}}
+                    <p>Please fill data.</p>
+                </div>
+                {{updatePassword.submit(class="submit_btn", id="submit_password" , value="Submit")}}
+                <label id="no_re" class="submit_btn">
+                    Cancel
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="card">
+        <div class="personal">
+            <strong>Name :</strong>
+            {% if identity %}
+                <p>{{identity.name}}</p>
+            {% else %}
+                <p>{{current_user.fname}} {{current_user.lname}}</p>
+            {% endif %}
+        </div>
+        <div class="personal">
+            <strong>Address :</strong>
+            {% if identity %}
+                <p>
+                    {{ identity.address }} 
+                    ตำบล {{ identity.subDistrict }} 
+                    อำเภอ {{ identity.district }} 
+                    จังหวัด {{ identity.province }}
+                </p>
+            {% else %}
+                <p>
+                    ????
+                    ตำบล ????
+                    อำเภอ ????
+                    จังหวัด ????
+                </p>
+            {% endif %}
+        </div>
+        <div class="personal">
+            <strong>Country :</strong>
+            <p>Thailand</p>
+        </div>
+        <div class="personal">
+            <strong>Phone :</strong>
+            {% if identity %}
+                <p>{{ identity.telephone }} </p>
+            {% else %}
+                <p>000-000-0000</p>
+            {% endif %}
+        </div>
+        <div class="personal">
+            <strong>Email :</strong>
+            <p>{{current_user.email}} </p>
+            
+        </div>
+    </div>
+</div>
+     
+<script src="{{url_for('static', filename='Javascripts/user_profile.js')}}"></script>
+<script src="{{url_for('static', filename='Javascripts/fetch_Api.js')}}"></script>
+       
+{% endblock%}

@@ -1,0 +1,241 @@
+/* ===================
+    appearence 
+=================== */
+
+:root{
+    --clr-primary: #FBFCE4;
+    --clr-secondary: #E3BB4F;
+    --clr-third: #AF8A1C;
+    --clr-blc: #000;
+    
+    --fs-big: 2.5em;
+    --fs-sml: 0.7em;
+    --fs-nav: 1.4em;
+}
+
+/* ===================
+  remove navbar 
+=================== */
+
+.navbar {
+    display: none;
+}
+
+/* ===================
+  remove cart button 
+=================== */
+
+.Cart {
+    visibility: hidden;
+    opacity: 0;
+}
+
+ /* ===================
+  set content position
+=================== */
+ 
+
+.content {
+    position: relative;
+    margin-left: 8em;
+}
+
+/* ===================
+  set login link to conner
+=================== */
+
+
+.content h2 {
+    position: absolute;
+    right: 10em;
+}
+
+/* ===================
+  set login link & FX
+=================== */
+
+.goLogin {
+    position: relative;
+    margin-left: 0.5em;
+
+    text-decoration: none;
+    color: var(--clr-third);
+}
+
+.goLogin::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2em;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: var(--clr-third);
+    transform: scaleX(0);
+}
+
+.goLogin:hover::after {
+    transform: scaleX(1);
+}
+
+/* ===================
+    title form 
+=================== */
+
+.create {
+    position: absolute;
+    top: -1em;
+    left: -3em;
+    margin: 0;
+    
+    width: max-content;
+
+    color: var(--clr-third);
+    font-size: 36px;
+}
+
+/* ===================
+  set Register form 
+=================== */
+
+.register_box {
+    position: absolute;
+    top: 5em;
+    left: 20em;
+}
+
+.register_form {
+    position: relative;
+    top: 2em;
+    left: 10em;
+}
+
+/* ===================
+  set label form 
+=================== */
+
+.label_form {
+    position: absolute;
+    top: -2em;
+    left: -3em;
+    width: 14em;
+}
+
+.label_text {
+    font-size: 24px;
+    text-align: right;
+}
+
+/* ===================
+  set input form 
+=================== */
+
+.text_form {
+    position: absolute;
+    top: -0.5em;
+    right: -43em;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+}
+
+.text_form_input {
+    padding-left: 1.5em;
+
+    width: 35em;
+    height: 3em;
+
+    border: 1px solid var(--clr-third);
+    border-radius: 5px;
+}
+
+.text_form_input:focus {
+    outline: none;
+}
+
+/* ===================
+  custom checkbox
+=================== */
+
+.checkbox {
+    position: absolute;
+    top: 12em;
+    left: 7em;
+
+    width: 26em;
+
+    color: var(--clr-blc);
+    font-size: 1.5em;
+}
+
+.check {
+    position: relative;
+    opacity: 0;
+}
+
+.check_toggle_label {
+    position: absolute;
+    top: 0;
+    left: -1em;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+/* ===================
+  change custom checkbox 
+=================== */
+
+.check_toggle_label span {
+    --size-box: 1em;
+    height: var(--size-box);
+    width: var(--size-box);
+    
+    display: block;
+
+    color: var(--clr-primary);
+    text-align: center;
+    line-height: 1em;
+    font-size: 1.5em;
+    
+    background: var(--clr-primary);
+    border: 2px solid var(--clr-third);
+    border-radius: 5px;
+}
+
+/* ===================
+  custom checkbox when checked
+=================== */
+
+.check_toggle_label.active span {
+    color: var(--clr-primary);
+
+    background: var(--clr-third);
+}
+
+/* ===================
+   set submit button
+=================== */
+
+.register_buttom {
+    position: absolute;
+    top: 23em;
+    left: 11em;
+}
+
+.button {
+    padding: 1em 5em;
+
+    color: var(--clr-primary);
+    font-size: var(--fs-nav);
+
+    background: var(--clr-third);
+    border: 0;
+    border-radius: 10em;
+    cursor: pointer;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='CSS/style.css')}}">
+    <title>Flask</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <img src="{{url_for('static', filename='reference/MFU.jpg')}}" alt="MFU Picture">
+    <br>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} <br>
+        {{ form.name() }} <br>
+        {{ form.age.label }} <br>
+        {{ form.age() }} <br>
+        {{ form.gender.label }} <br>
+        {{ form.gender() }} <br>
+        {{ form.activity.label }} <br>
+        {{ form.activity() }} <br>
+        {{ form.color.label }} <br>
+        {{ form.color() }} <br>
+        {{ form.submit() }}
+        
+    </form>
+    <br>
+    <ul>
+        {% for pizza in pizza %} 
+        <li>
+            {{pizza}}
+        </li>    
+        {% endfor %}
+    </ul>
+</body>
+</html>

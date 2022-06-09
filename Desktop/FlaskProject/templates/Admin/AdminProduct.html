@@ -1,0 +1,136 @@
+{% extends "Admin/AdminLayout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+{% endfor %}
+
+<style>
+  .custom {
+    padding: 0.4rem 3rem;
+  }
+</style>
+
+<div class="container-fluid">
+  <h1 class="my-3 fw-border">Products</h1>
+  <form method="POST" action="{{url_for('AddProduct')}}" enctype="multipart/form-data">
+      <div class="d-flex flex-row justify-content-evenly shadow p-3 mb-3 bg-light rounded">
+        <div class="row">
+          {{dataProduct.hidden_tag()}}
+          <div class="col-3">
+            {{dataProduct.type.label}}
+            {{dataProduct.type(class="form-select")}}
+          </div>
+          <div class="col-3">
+            {{dataProduct.group.label}}
+            {{dataProduct.group(class="form-select")}}
+          </div>
+          <div class="col-3">
+            {{dataProduct.code.label}}
+            {{dataProduct.code(class="form-control")}}
+          </div>
+          <div class="col-3">
+            {{dataProduct.name.label}}
+            {{dataProduct.name(class="form-control")}}
+          </div>
+          <div class="col-3">
+            {{dataProduct.price.label}}
+            {{dataProduct.price(class="form-control")}}
+          </div>
+          <div class="col-3">
+            {{dataProduct.deal.label}}
+            {{dataProduct.deal(class="form-control")}}
+          </div>
+          <div class="col-2">
+            {{dataProduct.file.label}}
+            {{dataProduct.file()}}
+          </div>
+          <div class="col-4"></div>
+          <div class="col-1">
+            <br>
+            {{dataProduct.submit(class="btn btn-success custom")}}
+          </div>
+        </div>
+      </div>
+  </form>     
+  
+  <br><br>
+  <h2>All Products</h2>
+  <br>
+
+  <table class="table table-striped ">
+    <tr>
+      <th scope="col" style="text-align: center;">ID</th>
+      <th scope="col" style="text-align: center;">รูป</th>
+      <th scope="col" style="text-align: center;">ประเภทข้าว</th>
+      <th scope="col" style="text-align: center;">ประเภทสินค้า</th>
+      <th scope="col" style="text-align: center;">รหัสสินค้า</th>
+      <th scope="col" style="text-align: center;">ชื่อสินค้า</th>
+      <th scope="col" style="text-align: center;">ราคา</th>
+      <th scope="col" style="text-align: center;">ข้อเสนอ</th>
+      <th scope="col" style="text-align: center;">ตัวเลือก</th>
+    </tr>
+  {% for ShowItem in Detail %}
+  <form method="POST" action="{{url_for('UpdateProduct', input=ShowItem.id)}}" enctype="multipart/form-data">
+      <tr>
+        <th scope="row" class="align-middle col-1 justify-content-center" style="text-align: center;">{{ ShowItem.id }}</th>
+        <td class="align-middle col-1" style="text-align: center;">
+          {{dataProduct.file(id="Image", style="position: absolute; opacity: 0; visibility: hidden;")}}
+          <label for="Image">
+            <img loading="lazy" style="width: 5em;  cursor: pointer;"  src="{{ url_for('static', filename = 'Product_IMG/' + ShowItem.file ) }}" alt="Image">
+          </label>
+        </td>
+        <td class="align-middle col-2 justify-content-center" style="text-align: center;">
+          {% if ShowItem.type == "SR" %}
+            <p>current is ข้าวเหนียว</p>
+          {% elif ShowItem.type == "WR" %}
+            <p>current is ข้าวจ้าว</p>
+          {% elif ShowItem.type == "IR" %}
+            <p>current is ข้าวนำเข้า</p>
+          {% elif ShowItem.type == "HR" %}
+            <p>current is ข้าวเพื่อสุขภาพ</p>
+          {% endif %}
+          {{dataProduct.type(class="form-select")}}
+        </td>
+        <td class="align-middle col-2 justify-content-center" style="text-align: center;">
+          {% if ShowItem.group == "PM" %}
+            <p>current is Promotion</p>
+          {% elif ShowItem.group == "BS" %}
+            <p>current is Boxset</p>
+          {% elif ShowItem.group == "NM" %}
+            <p>current is Normal</p>
+          {% elif ShowItem.group == "PO" %}
+            <p>current is Pre-Order</p>
+          {% endif %}
+          {{dataProduct.group(class="form-select")}}
+        </td>
+        <td class="align-middle col-1 justify-content-center" style="text-align: center;">
+          {{dataProduct.code(value=ShowItem.code)}}
+        </td> 
+        <td class="align-middle col-2 justify-content-center" style="text-align: center;">
+          {{dataProduct.name(value=ShowItem.name)}}
+        </td>
+        <td class="align-middle col-1 justify-content-center" style="text-align: center;">
+          {{dataProduct.price(value=ShowItem.price)}}
+        </td>
+        <td class="align-middle col-1 justify-content-center" style="text-align: center;">
+          {{dataProduct.deal(value=ShowItem.deal)}}
+        </td>
+        <td class="align-middle col-1 justify-content-center" style="text-align: center;">
+          <input class="btn btn-warning custom" type="submit" value="Update">
+          
+          <a href="{{url_for('DeleteProduct', input = ShowItem.id)}}">
+            <input class="btn btn-danger custom" type="button" value="Delete">
+          </a>
+        </td>
+      </tr>
+  </form>
+  {% endfor %}
+  </table>
+</div>
+   
+{% endblock%}  

@@ -1,0 +1,410 @@
+:root{
+    --clr-primary: #FBFCE4;
+    --clr-secondary: #E3BB4F;
+    --clr-third: #AF8A1C;
+    --clr-promotion: #ff4e00;
+    --clr-blc: #000;
+    
+    --fs-big: 2.5em;
+    --fs-sml: 0.7em;
+    --fs-nav: 1.4em;
+}
+
+
+.Cart {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.user_info {
+    position: relative;
+}
+
+.user_info > img {
+    position: relative;
+    top: 4em;
+    left: 45em;
+    
+    inline-size: 100%;
+    
+    width: 10em;
+    height: 10em;
+    
+    object-fit: cover;
+    border-radius: 50%;
+    
+    filter: none;
+}
+
+.user_info > *:nth-child(2) {
+    position: absolute;
+    top: 4em;
+    left: 30em;
+    
+    font-size: 2em;
+}
+
+.component > * {
+    position: absolute;
+    left: -10em;
+
+    text-decoration: none;
+}
+
+.component > *:nth-child(1) {
+    top: 1.5em;
+}
+
+.component > *:nth-child(2) {
+    top: 8em;
+}
+
+.component > *:nth-child(3) {
+    top: 13em;
+}
+
+.Img_btn {
+    opacity: 0;
+}
+
+
+.user_btn_label{
+    position: relative;
+    
+    width: 10em;
+    height: 4em;
+    
+    color: var(--clr-primary);
+    font-size: 1em;
+    font-weight: 600;
+    
+    background-color: var(--clr-secondary);
+    border: 0;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+}
+
+.user_btn_label{
+    display: block;
+    
+    width: 10em;
+    height: 4em;
+
+    text-align: center;
+    line-height: 4em;
+}
+
+.load_btn,
+.load_btn_cancel {
+    position: absolute;
+    top: 1.2em;
+
+    width: 10em;
+    height: 2.5em;
+
+    color: var(--clr-primary);
+    font-size: 1em;
+    font-weight: 600;
+
+    background-color: var(--clr-secondary);
+    border: 0;
+    border-radius: 10px 0 0 0;
+
+    cursor: pointer;
+}
+
+.load_btn_cancel {
+    top: 3.8em;
+
+    height: 1.5em;
+
+    text-align: center;
+    line-height: 1.5em;
+
+    background-color: var(--clr-promotion);
+    border-radius: 0 0 0 10px ;
+}
+
+.load_btn_cancel:hover,
+.user_btn_label:hover,
+.load_btn:hover {
+    width: 12em;
+    transform: translateX(-2em);    
+}
+
+
+.personal_info {
+    position: relative;
+    top: 5em;
+    left: 25em;
+    
+    padding: 2em;
+    margin-bottom: 8em;
+    width: 40em;
+    height: 16em;
+
+    font-size: var(--fs-nav);
+    font-weight: 800;
+
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 2px var(--clr-blc);
+}
+
+.title {
+    font-size: var(--fs-nav);
+}
+
+.personal {
+    position: relative;
+    top: 0.5em;
+    left: 2em;
+    
+    line-height: 0.5em;
+}
+
+.personal > strong {
+    color: var(--clr-third);
+}
+
+.personal > *:nth-child(2) {
+    position: relative;
+    top: 0em;
+    left: 2em;
+
+    font-weight: 400;
+    color: rgb(49, 45, 45);
+    text-align: start;
+}
+
+/* # ===================================
+#             form  address
+# =================================== */
+
+.change_info{
+    position: relative;
+    top: -7em;
+    left: 13em;
+
+    width: 40em;
+}
+
+.label {
+    color: var(--clr-third);
+}
+
+
+.sec_email {
+    margin-left: 2.4em;
+}
+
+.sec_name {
+    position: relative;
+    top: 1em;
+}
+
+.sec_add,
+.scope_1 {
+    position: relative;
+    top: 2em;
+    margin-left: 1.1em;
+}
+
+.scope_1,
+.scope_2 {
+    position: relative;
+    top: 3em;
+}
+
+.scope_2 {
+    top: 4em;
+}
+
+.sub_sec1,
+.sub_sec2,
+.sub_sec3 {
+    position: absolute;
+    top: 0em;
+}
+
+.sub_sec1 {
+    left: 19.95em;
+}
+
+
+.sub_sec2{
+    left: 20.4em;
+}
+
+.sub_sec3 {
+    left: 19.25em;
+}
+
+.sec_phone {
+    position: relative;
+    top: 5em;
+    margin-left: -1.7em;
+}
+/* this also use in form password  */
+.text_form_input,
+.text_form_address,
+.text_form_post  {
+    padding-left: 1.5em;
+
+    width: 20em;
+    height: 2em;
+
+    border: 1px solid var(--clr-third);
+    border-radius: 5px;
+    outline: none;
+}
+
+.text_form_address {
+    width: 53.6em;
+}
+
+.text_form_post {
+    padding-left: 1em;
+    width: 4em;
+}
+
+.text_form_select {
+    padding-left: 1.5em;
+    width: 21.5em;
+    height: 2em;
+    
+    background: var(--clr-primary); 
+    border: 1px solid var(--clr-third);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px -2px;
+    cursor: pointer;
+}
+
+/* this also use in form password  */
+.submit_btn {
+    position: absolute;
+    top: 11.5em;
+    left: 29em;
+
+    width: 10em;
+    height: 2em;
+
+    color: var(--clr-primary);
+    font-size: 1em;
+    font-weight: 600;
+
+    background-color: var(--clr-secondary);
+    border: 0;
+    border-radius: 10px ;
+
+    cursor: pointer;
+}
+
+/* this also use in form password  */
+.submit_btn#back{
+    left: 22em;
+    
+    width: 6em;
+
+    line-height: 2em;
+    text-align: center;
+    
+    background-color: var(--clr-promotion);
+}
+
+/* this also use in form password  */
+.submit_btn:hover {
+    width: 10.4em;
+    height: 2.4em;
+    
+    transform: translateX(-0.2em)
+               translateY(-0.2em);
+    box-shadow: 1px 1px 1px 1px var(--clr-blc);
+} 
+
+/* this also use in form password  */
+.submit_btn#back:hover {
+    line-height: 2.45em;
+
+    transform: translateX(-0.1em)
+               translateY(-0.25em);
+}   
+
+/* # ===================================
+#            form  password
+# =================================== */
+
+.change_password {
+    position: relative;
+    top: -8em;
+    left: 24em;
+}
+
+.change_password > :nth-child(1) {
+    position: absolute;
+    top: -2em;
+    left: -6em;
+    font-size: 1.2em;
+}
+
+.change_password > :nth-child(3) {
+    position: absolute;
+    top: 2.5em;
+    left: -1.2em;
+
+    width: 30em;
+}
+
+.change_password > :nth-child(3) > :nth-child(3) {
+    position: absolute;
+    top: -0.5em;
+    left: 38em;
+
+    font-size: 0.6em;
+    color: var(--clr-promotion);
+}
+
+.eye {
+    position: relative;
+    top: 0.5em;
+    left: 0;
+
+    width: 1.5em;
+
+    cursor: pointer;
+}
+
+.show_password {
+    position: relative;
+    top: -1.8em;
+    left: 21.2em;
+
+    width: 1.5em;
+    height: 1px;
+
+    background-color: #fff;
+    box-shadow: 0 1px 0 1px var(--clr-blc);
+    transform: rotate(25deg);
+}
+
+.submit_btn#no_re {
+    left: 22em;
+    
+    width: 6em;
+
+    line-height: 2em;
+    text-align: center;
+    
+    background-color: var(--clr-promotion);
+}
+
+
+.change_password .submit_btn {
+    top: 4.5em;
+    left: 8.5em;
+}
+
+.change_password .submit_btn#no_re {
+    left: 2em;
+}
+

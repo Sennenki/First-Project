@@ -1,0 +1,597 @@
+/* ===================
+    appearence 
+=================== */
+
+:root{
+    --clr-primary: #FBFCE4;
+    --clr-secondary: #E3BB4F;
+    --clr-third: #AF8A1C;
+    --clr-promotion: #ff4e00;
+    --clr-blc: #000;
+    
+    --fs-big: 2em;
+    --fs-sml: 0.7em;
+    --fs-nav: 1.4em;
+}
+
+/* ===================
+Transition
+=================== */
+
+*, ::before, ::after {
+    transition: all ease-in-out 300ms;
+}
+
+/* ===================
+global setting
+=================== */
+
+html {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-padding-block: 4.5em;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--clr-primary);
+}
+
+/* ===================
+    logo background
+   =================== */
+
+.logo {background: var(--clr-secondary);}
+
+/* ===================
+        logo button
+   =================== */
+
+.btn {
+    position: relative;
+    max-width: 150em;
+
+    display: grid;
+    place-content: center;
+}
+
+
+.btn a {
+    color: var(--clr-blc);
+    text-decoration: none;
+}
+
+.Logo {
+    padding: 1.5em;
+
+    width: 20em;
+}
+/* for_Mainlayout */
+/* ===================
+        navbar
+   =================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    
+    background: var(--clr-third);
+    z-index: 99;
+}
+
+.navbar-menu {
+    position: relative;
+    padding: 0 5em;
+    margin: 0 1em;
+    height: 100%;
+
+    list-style: none;
+
+    display: flex;
+}
+
+/* ===================
+     navbar hover
+=================== */
+
+.navbar-menu .btn_fx:focus,
+.navbar-menu .btn_fx:hover {
+    background: var(--clr-primary);
+    color: var(--clr-third);
+    transform: translateY(5px);
+    border-radius: 10px 10px 0 0;
+}
+
+/* ===================
+     Heart effect
+=================== */
+
+.navbar-menu a:focus img.heart,
+.navbar-menu img.heart:hover {
+    filter: invert(21%) 
+    sepia(99%) 
+    saturate(7473%) 
+    hue-rotate(359deg) 
+    brightness(102%) 
+    contrast(109%);
+}
+
+/* ===================
+    profile effect
+=================== */
+
+.navbar-menu a:focus img.user,
+.navbar-menu img.user:hover {
+    filter: invert(21%) 
+    sepia(90%) 
+    saturate(4508%) 
+    hue-rotate(116deg) 
+    brightness(99%) 
+    contrast(103%);
+}
+
+/* ===================
+    translate effect
+=================== */
+
+.navbar-menu a:focus img.lang,
+.navbar-menu img.lang:hover {
+    filter: invert(9%) 
+    sepia(100%) 
+    saturate(7020%) 
+    hue-rotate(247deg)
+    brightness(94%)
+    contrast(146%);
+}
+
+/* ===================
+    translate effect
+=================== */
+
+.navbar-menu-items {
+    margin-left: 2em;
+    
+    display: flex;
+}
+
+
+/* ===================
+    middle blank space
+=================== */
+
+.navbar-menu2 {
+    margin-left: 27.5em;
+}
+
+/* ===================
+      list sign
+=================== */
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 0;
+    left: 2em;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+/* ===================
+     list icon
+=================== */
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    position: relative;
+    height: 3px;
+    width: 2em;
+    
+    display: block;
+    
+    background: var(--clr-primary);
+    border-radius: 50px;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after { 
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    bottom: 8px;
+}
+
+.nav-toggle-label span::after { 
+    top: 8px;
+}
+
+/* ===================
+     navbar items
+=================== */
+
+.navbar-menu a {
+    height: 100%;
+    
+    display: inline-block;
+    
+    text-decoration: none;
+    color: var(--clr-primary);
+    
+}
+
+.navbar-menu p {
+    margin: 1em 0.5em;
+    
+    font-size: var(--fs-nav);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.navbar-menu .user_pic {
+    inline-size: 100%;
+    
+    width: 2.5em;
+    height: 2.5em;
+    
+    object-fit: cover;
+    border-radius: 50%;
+    filter: none;
+    cursor: pointer;
+}
+
+.navbar-menu img {
+    padding: 0 1em;
+    margin: 1em 0 0;
+    width: 2.5em;
+    
+    filter: invert(86%) sepia(8%) saturate(344%) hue-rotate(24deg) brightness(110%) contrast(105%);;
+}
+
+
+/* ===================
+    vertical line
+=================== */
+
+.line {
+    position: absolute;
+    top: 0.7em;
+    left: 0.5em;
+    width: 0.2em;
+    height: 3em;
+    
+    background: var(--clr-primary);
+    border-radius: 10px;
+}
+
+/* ===================
+      Search bar
+=================== */
+
+.search-bar {
+    position: relative;
+    
+    display: flex;
+}
+
+.search_input {
+    margin-top: 1.25em;
+    margin-left: 3em;
+    padding-left: 0.5em;
+    width: 8em;
+    height: 2.5em;
+    
+    border-radius: 10px 0 0 10px;
+    border: 0;
+}
+
+.search_input:focus {
+    width: 15em;
+    
+    border-radius: 10px 0 0 10px;
+    outline: 0
+}
+
+/* ===================
+     Search button
+=================== */
+
+.search_button {
+    position: relative;
+    top: 0em;
+    left: -0.3em;
+    width: 3em;
+    height: 2.7em;
+    
+    
+    border-radius: 0 10px 10px 0;
+    border: 0;
+    background: var(--clr-secondary);
+    cursor: pointer;
+}
+
+.search_button:focus,
+.search_button:hover {
+    width: 3.6em;
+    height: 3.6em;
+
+    outline: none;    
+    box-shadow: 5px 5px 10px 0px #000000BA;
+}
+
+.search_sign {
+    position: relative;
+    top: 0.4em;
+    left: -4em;
+
+    margin: 0;
+    padding: 0;
+
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
+}
+
+.search_button:focus + label .search_sign,
+.search_button:hover + label .search_sign {
+    left: -4.2em;
+
+}
+
+/* ===================
+      user profile 
+=================== */
+
+.profile_btn {
+    position: relative;
+}
+
+.profile_btn > img {
+    cursor: pointer;
+}
+
+.User_profile {
+    position: absolute;
+    left: -5.5em;
+
+    width: 15em;
+    height: 17em;
+
+    text-align: center;
+
+    background-color: var(--clr-primary);
+    border: 2px solid var(--clr-third);
+    border-radius: 10px;
+    box-shadow: 0 1px 1px 1px var(--clr-blc);
+
+    opacity: 0;
+    visibility: hidden;
+}   
+
+
+.User_name {
+    position: relative;
+    margin-bottom: 2em;
+}  
+
+.User_name > *:nth-child(1) {
+    font-size: 1.2em;
+    font-weight: 400;
+}  
+
+.User_name > *:nth-child(2) {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 1.5em;
+    
+    font-size: 0.9em;
+    font-weight: 300;
+    color: var(--clr-blc);
+    opacity: 0.7;
+}  
+
+
+.User_profile_border {
+    position: relative;
+    
+    margin-top: 0.5em;
+    margin-left: 5.5em;
+    
+    width: 4em;
+    height: 4em;
+    
+    background-color: transparent;
+}
+
+
+.User_profile_border > img{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    margin-top: 0.2em;
+    margin-left: -1.5em;
+    
+    
+    inline-size: 100%;
+    
+    width: 5em;
+    height: 5em;
+    
+    object-fit: cover;
+    border-radius: 50%;
+    
+    filter: none;
+}
+
+.showUser {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ===================
+    User button
+=================== */
+
+.btn_stuff {
+    display: grid;
+    gap: 1em;
+}
+
+.User_btn {
+    padding: 0.5em 2em;
+    
+    width: 15em;
+    height: 3em;
+    
+    font-weight: 700;
+    color: var(--clr-primary);
+    
+    background-color: var(--clr-secondary);
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.User_btn:hover {
+    width: 15.5em;
+    height: 3.5em;
+
+    transform: translateY(-3px);
+    box-shadow: 1px 1px 1px 1px var(--clr-blc);
+}
+
+/* ===================
+      Cart button
+=================== */
+
+.Cart {
+    position: absolute;
+    top: 7em;
+    right: 4em;
+    
+    height: 5em;
+    width: 5em;
+    
+    text-decoration: none;
+
+    background: var(--clr-third);
+    border-radius: 40px;
+    box-shadow: 0px 5px 4px -3px rgb(0, 0, 0, 0.6);
+}
+
+.Cart img {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    
+    width: 70%;
+    
+    filter: invert(91%) sepia(4%) saturate(921%) hue-rotate(10deg) brightness(111%) contrast(190%);
+}
+
+.Cart_link:focus {
+    padding: 0 2.4em 3.9em;
+
+    border-radius: 20px;
+    border: 2px solid var(--clr-secondary);
+}
+
+.Cart:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 9px 3px -2px rgb(0, 0, 0, 0.6);
+}
+
+.cart_count {
+    position: absolute;
+    left: 4em;
+    padding: 0.2em 0.5em;
+
+    color: var(--clr-primary);
+
+    background-color: var(--clr-promotion);
+    border-radius: 100%;
+}
+
+
+/* ===================
+        footer
+=================== */
+
+.footer {
+    margin-top: auto;
+    margin-left: 5em;
+    margin-bottom: 2em;
+
+   
+    width: 90%;
+    height: 5em;
+    
+    background: var(--clr-primary);
+    border-top: 2px solid var(--clr-third);
+}
+.footer_list {
+    display: flex;
+    gap: 25em;
+    margin-left: 7em;
+}
+
+.footer-link {
+    position: relative;
+    
+    font-size: var(--fs-nav);
+    text-decoration: none;
+    color: var(--clr-third);
+
+} 
+
+.footer-link p {
+    margin: 1em 0 0;
+}
+
+/* ===================
+    footer hover
+=================== */
+
+.footer-link::after {
+    content: '';
+
+    position: absolute;
+    bottom: -0.2em;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+    
+    background: var(--clr-third);
+    transform: scaleX(0);
+} 
+
+.footer-link:focus::after,
+.footer-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* ===================
+        size screen
+=================== */

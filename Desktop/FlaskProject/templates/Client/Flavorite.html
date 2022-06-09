@@ -1,0 +1,58 @@
+{% extends "Layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_Flavorite.css')}}">
+<div class="get_back"><a href="{{url_for('MemberHome', select='index')}}" class="Link">Go back</a></div>
+<div class="cart_list" >
+    <header class="table-name">
+        Flavorite Item
+        <span class="amount-item"> ({{countOrder}} items)</span>
+        <span>
+            <form method="POST" action="/MemberFlavorite/delete_1">
+                {{order.hidden_tag()}}
+                {{order.delete(id="del", class="delete_all_btn" )}}
+                <label for="del">
+                    <img class="delete_all" src="{{url_for('static' , filename='reference/trash.svg')}}" alt="">
+                </label>
+            </form>
+        </span>
+    </header>
+    <table class="head-record">
+        <tr class="table-head">
+            <th class="table-head-name col_1">Product Name</th>
+            <th class="table-head-name col_2">Price</th>
+            <th class="table-head-name col_3">Pick</th>
+            <th class="table-head-name col_4">Remove</th>
+        </tr>
+    </table>
+    <div class="list_item">
+        <form method="POST" action="/MemberCart/submit_1">
+        {% for listItem in listItem %}
+            <div class="product-record">
+                {% if listItem.product_counter % 2 == 1  %}
+                    <div class="product-picture row">
+                {% else %}
+                    <div class="product-picture ">
+                {% endif %}
+                    <img src="{{url_for('static', filename = 'Upload/' + listItem.product_images )}}" alt="image">
+                </div>
+                <div class="product-description ">
+                    {{listItem.product_name}}
+                </div>
+                <div class="product-price " id="price">
+                     {{listItem.product_price}} THB
+                </div>
+                <div class="product-choose ">
+                    <a href="/MemberFlavorite/add_{{listItem.product_id}}">
+                        <button type="button" class="btn_choose" id="add"> Add to Cart </button>
+                    </a>
+                </div>
+                <div class="product-choose ">
+                    <a href="/MemberFlavorite/remove_{{listItem.product_id}}">
+                        <button type="button" class="btn_choose" id="remove"> Delete </button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>  
+{% endblock%}

@@ -1,0 +1,97 @@
+{% extends "Admin/AdminLayout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+{% endfor %}
+
+<style>
+    .bg-custom {
+        background-color: rgb(226, 226, 226);
+        box-shadow: inset 0 1px 5px 1px rgb(128, 128, 128);
+    }
+
+    .add_btn > img {
+        width: 8em;
+        
+        filter: invert(38%) sepia(46%) saturate(4663%) hue-rotate(360deg) brightness(101%) contrast(109%);
+    }
+
+    :where(.add_btn:focus, .add_btn:hover) {
+        transition: all ease-in-out 200ms;
+        transform: translateX(10px);
+    }
+
+</style>
+
+
+<div class="container-fluid">
+    <h1 class="my-3 fw-border">Dashboard</h1>
+    <div class="row g-4">
+        <div class="col-3">
+            <div class="dashboard position-relative border rounded-3" style="height: 100px;">
+                <i data-feather="calendar" class="bgn position-absolute top-50 start-0 translate-middle-y ms-4 text-light" style="width: 60px; height: 60px;"></i>
+                <h5 class="text-end text-light mt-2 me-2 mb-1 fst-italic">Date</h5>
+                <p class="text-end text-light me-2 fs-2 fw-bold">{{CurrentDate}}</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="dashboard position-relative border rounded-3" style="height: 100px;">
+                <i data-feather="shopping-bag" class="bgn position-absolute top-50 start-0 translate-middle-y ms-4 text-light" style="width: 60px; height: 60px;"></i>
+                <h5 class="text-end text-light mt-2 me-2 mb-1 fst-italic">PRODUCTS</h5>
+                <p class="text-end text-light me-2 fs-2 fw-bold">We had {{AmountProduct}} Item</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="dashboard position-relative border rounded-3" style="height: 100px;">
+                <i data-feather="shopping-cart" class="bgn position-absolute top-50 start-0 translate-middle-y ms-4 text-light" style="width: 60px; height: 60px;"></i>
+                <h5 class="text-end text-light mt-2 me-2 mb-1 fst-italic">Orders</h5>
+                <p class="text-end text-light me-2 fs-2 fw-bold">Orders left {{countOrder}} orders</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="dashboard position-relative border rounded-3" style="height: 100px;">
+                <i data-feather="users" class="bgn position-absolute top-50 start-0 translate-middle-y ms-4 text-light" style="width: 60px; height: 60px;"></i>
+                <h5 class="text-end text-light mt-2 me-2 mb-1 fst-italic">Customers</h5>
+                <p class="text-end text-light me-2 fs-2 fw-bold">We had {{AmountUser-1}} user</p>
+            </div>
+        </div>
+    </div>
+    <h1 class="col-2 my-3 fw-border">New Order</h1>
+    <a href="{{url_for('DelAllOrder')}}">deleteall</a>
+    {% for info in getOrder %}
+        <div class="shadow p-3 mb-5 bg-body rounded">
+            {% for order in allItem %}
+                {% if info.date_log == order.date_log %}
+                    ชื่อสินค้า <strong style="font-size: 1.2rem;">{{order.product.name}}</strong> จำนวน 
+                    <strong style="font-size: 1.2rem;">{{info.amount}}</strong>  ชิ้น <br>
+                {% endif %}
+            {% endfor %}
+            <br>
+            ------------------------------- <br>
+            ที่อยู่ <strong style="font-size: 1.2rem;">{{info.locate.address}}</strong> 
+            ตำบล <strong style="font-size: 1.2rem;">{{info.locate.subDistrict}}</strong> 
+            อำเภอ <strong style="font-size: 1.2rem;">{{info.locate.district}}</strong> 
+            จังหวัด <strong style="font-size: 1.2rem;">{{info.locate.province}}</strong> <br>
+            รหัสไปรษณีย์ <strong style="font-size: 1.2rem;">{{info.locate.postCode}} </strong>
+            เบอร์โทรศัพท์ <strong style="font-size: 1.2rem;">{{info.locate.telephone}}</strong> <br>
+            {% if info.locate.taxName %}
+            ------------------------------- <br>
+            ขอใบกำกับภาษี <br>
+                {{info.locate.taxName}} <br>    
+                {{info.locate.taxPayer}} <br>
+                {{info.locate.taxAddress}} <br>
+            {% endif %}
+            ------------------------------- <br>
+            <strong><i style="font-size: 1.2rem;">{{info.locate.name}} </i></strong>  <br>
+            {{info.date_log}}
+            <br>
+            <a href="{{url_for('DelOrder', input=info.date_log)}}">delete</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock%}  

@@ -1,0 +1,35 @@
+{% extends "Admin/AdminLayout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+{% endfor %}
+
+    <form method="POST">
+        {{AdLog.hidden_tag()}}
+        <div class="card text-center mx-auto border-secondary border-3 shadow-lg" style="width: 30em;">
+            <div class="card-body">
+                <h1 class="card-title fw-bold">Please sign-in</h1>
+                <p class="card-text fst-italic">(for Administrator)</p>
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text bg-secondary bg-gradient text-light" id="addon-wrapping" style="width: 6em;">Username</span>
+                    {{AdLog.email(class="form-control", placeholder="Enter your email")}}
+                    <!-- <input type="text" class="form-control" placeholder="Enter your email" aria-label="Username" aria-describedby="addon-wrapping"> -->
+                </div>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text bg-secondary bg-gradient text-light" id="addon-wrapping" style="width: 6em;">Password</span>
+                    {{AdLog.password(class="form-control", placeholder="Enter your password")}}
+                    <!-- <input type="password" class="form-control" placeholder="Enter your password" aria-label="Username" aria-describedby="addon-wrapping"> -->
+                </div>
+                <div>
+                    {{AdLog.submit(class="btn mt-4 shadow", style="width: 10em; background-color: #E3BB4F;")}}
+                    <!-- <button type="submit" class="btn mt-4 shadow" style="width: 10em;">Login</button> -->
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock%}  

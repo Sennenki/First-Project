@@ -1,0 +1,165 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+
+{% if itemFound %}
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_Search.css')}}">
+<div class="title">Result <span>{{countItem}} Item</span> </div>
+<div class="container">
+    {% for item in itemFound %}
+    {% if item.group == "PM" %}
+    <div class="card promote">
+        {% elif item.group == "PO" %}
+        <div class="card stockOut">
+            {% else %}
+            <div class="card">
+                {% endif %}
+                <img loading = "lazy" src="{{ url_for('static', filename = 'Product_IMG/' + item.file ) }}" alt="Image">
+                <span>{{item.name}}</span>
+                <span>{{item.price}} THB</span>
+                {% if current_user %}
+                <a class="Picker" href="{{url_for('AddtoCart', input=current_user.email, code=item.code)}}">
+                    {% else %}
+                    <a class="Picker" href="{{url_for('Login')}}">
+                        {% endif %}
+                        Add to Cart
+                    </a>
+                    {% if item.group == "PM" %}
+                    <span>{{item.deal}}</span>
+                    {% elif item.group == "PO" %}
+                    <span>OUT OF Stock</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+{% else %}
+    <link rel="stylesheet" href="{{url_for('static', filename='CSS/for_Homepage.css')}}">
+    <div class="container">
+        <div class="banner height_set">
+            <img loading = "lazy" src="{{url_for('static', filename='reference/Banner-3.jpg')}}" alt="Banner3">
+        </div>
+    </div> 
+    <div class="promotion_zone" id="promotion_zone">
+        <div class="Group_title"> Promotion </div>
+        <div class="horizon_scroll snaps_scroll">
+            {% for promote in PromotionProduct %}
+            <div class="card promote">
+                <img loading = "lazy" src="{{ url_for('static', filename = 'Product_IMG/' + promote.file ) }}" alt="Image">
+                <span>{{promote.name}}</span>
+                <span>{{promote.price}} THB</span>
+                {% if current_user %}
+                <a class="Picker" href="{{url_for('AddtoCart', input=current_user.email, code=promote.code)}}">
+                    {% else %}
+                    <a class="Picker" href="{{url_for('Login')}}">
+                        {% endif %}
+                        Add to Cart
+                    </a>
+                    <span>{{promote.deal}}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+            
+        <div class="box_set_zone" id="box_set_zone">
+            <div class="Group_title"> Box Set </div>
+            <div class="horizon_scroll snaps_scroll">
+                {% for Boxset in BoxsetProduct %}
+                <div class="card promote">
+                    <img loading = "lazy" src="{{ url_for('static', filename = 'Product_IMG/' + Boxset.file ) }}" alt="Image">
+                    <span>{{Boxset.name}}</span>
+                    <span>{{Boxset.price}} THB</span>
+                    {% if current_user %}
+                    <a class="Picker" href="{{url_for('AddtoCart', input=current_user.email, code=Boxset.code)}}">
+                        {% else %}
+                        <a class="Picker" href="{{url_for('Login')}}">
+                            {% endif %}
+                            Add to Cart
+                        </a>
+                        <span>{{Boxset.deal}}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+    <div class="all_product" id="all_product">
+        <div class="Group_title"> ข้าวเหนียว </div>
+        <div class="horizon_scroll snaps_scroll">
+            {% for Sticky in stickyRice %}
+            {% if Sticky.group == "PM" %}
+            <div class="card promote">
+                {% elif Sticky.group == "PO" %}
+                <div class="card stockOut">
+                    {% else %}
+                    <div class="card">
+                        {% endif %}
+                    <img loading = "lazy" src="{{ url_for('static', filename = 'Product_IMG/' + Sticky.file ) }}" alt="Image">
+                    <span>{{Sticky.name}}</span>
+                    <span>{{Sticky.price}} THB</span>
+                    {% if current_user %}
+                        <a class="Picker" href="{{url_for('AddtoCart', input=current_user.email, code=Sticky.code)}}">
+                    {% else %}
+                        <a class="Picker" href="{{url_for('Login')}}">
+                    {% endif %}
+                        Add to Cart
+                    </a>
+                    {% if Sticky.group == "PM" %}
+                        <span>{{Sticky.deal}}</span>
+                    {% elif Sticky.group == "PO" %}
+                        <span>OUT OF Stock</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="Group_title"> ข้าวจ้าว </div>
+        <div class="horizon_scroll snaps_scroll">
+            {% for White in whiteRice %}
+                {% if White.group == "PM" %}
+                    <div class="card promote">
+                {% elif White.group == "PO" %}
+                    <div class="card stockOut">
+                {% else %}
+                    <div class="card">
+                {% endif %}
+                    <img loading = "lazy" src="{{ url_for('static', filename = 'Product_IMG/' + White.file ) }}" alt="Image">
+                    <span>{{White.name}}</span>
+                    <span>{{White.price}} THB</span>
+                    {% if current_user %}
+                        <a class="Picker" href="{{url_for('AddtoCart', input=current_user.email, code=White.code)}}">
+                    {% else %}
+                        <a class="Picker" href="{{url_for('Login')}}">
+                    {% endif %}
+                        Add to Cart
+                    </a>
+                    {% if White.group == "PM" %}
+                        <span>{{White.deal}}</span>
+                    {% elif White.group == "PO" %}
+                        <span>OUT OF Stock</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="preOrder_zone" id="preOrder_zone">
+        <div class="Group_title"> Pre-Order </div>
+        <div class="horizon_scroll snaps_scroll">
+            {% for PreOrder in PreOrderProduct %}
+                <div class="card stockOut">
+                    <img loading = "lazy" src="{{ url_for('static', filename = 'Product_IMG/' + PreOrder.file ) }}" alt="Image">
+                    <span>{{PreOrder.name}}</span>
+                    <span>{{PreOrder.price}} THB</span>
+                    {% if current_user %}
+                    <a class="Picker" href="{{url_for('AddtoCart', input=current_user.email, code=PreOrder.code)}}">
+                        {% else %}
+                        <a class="Picker" href="{{url_for('Login')}}">
+                            {% endif %}
+                            Add to Cart
+                        </a>
+                        <span>OUT OF Stock</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% endblock%}

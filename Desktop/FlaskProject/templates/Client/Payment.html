@@ -1,0 +1,183 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+</div>  
+
+{% endfor %}
+
+<link rel="stylesheet" type= "text/css" href="{{url_for('static', filename='CSS/for_Payment.css')}}">
+<div class="payment">
+    <div class="path">
+        <p>Hompage > Cart > Payment</p>
+    </div>
+    <div class="delivery_form">
+        <div class="order_sum">
+            <h2 class="order_sum_title"><u class="underline">Order Summary</u></h2>
+            <table class="order_sum_list">
+                {% for order in userCart %}
+                <tr>
+                    <td class="product-picture col_one">
+                        <img src="{{url_for('static', filename = 'Product_IMG/' + order.file )}}" alt="image">
+                    </td>
+                    <td class="product-description col_two">
+                        {{order.name}}
+                    </td>
+                    <td class="product-description col_four">
+                        {{order.amount}}
+                    </td>
+                    <td class="product-description col_five">{{order.price}} บาท</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2"> + shipping 100  THB</td>
+                    <td colspan="2" id="sumAll"> TOTAL $$$ THB </td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="form_title">
+            <h2>Your delivery information</h2>
+        </div>
+        <div class="fill_form">
+            <form method="POST" action="{{url_for('GetInformationt', input=current_user.email)}}">
+                {{Delivery.hidden_tag()}}
+                <div class="sec_email">
+                    {{Delivery.email.label}}
+                    {{Delivery.email(class="text_form_input")}}
+                </div>
+                <div class="sec_name">
+                    {{Delivery.fname.label}}
+                    {{Delivery.fname(class="text_form_input")}}
+                    <div class="sub_sec1">
+                        {{Delivery.lname.label}}
+                        {{Delivery.lname(class="text_form_input")}}
+                    </div>
+                </div>
+                <div class="sec_add">
+                    {{Delivery.address.label}}
+                    {{Delivery.address(class="text_form_address")}}
+                </div>
+                <div class="scope_1">
+                    {{Delivery.province.label}}
+                    {{Delivery.province(class="text_form_select", id="province")}}
+                    <div class="sub_sec2">
+                        {{Delivery.district.label}}
+                        {{Delivery.district(class="text_form_select", id="district")}}
+                    </div>
+                </div>
+                <div class="scope_2">
+                    {{Delivery.subDistrict.label}}
+                    {{Delivery.subDistrict(class="text_form_select", id="subDistrict")}}
+                    <div class="sub_sec3">
+                        {{Delivery.postcode.label}}
+                        {{Delivery.postcode(class="text_form_post",maxlength=5)}}
+                    </div>
+                </div>
+                <div class="sec_phone">
+                    {{Delivery.telNumber.label}}
+                    {{Delivery.telNumber(class="text_form_input",maxlength=10)}}
+                </div>
+                <div class="want_tax" id="fill_tax">
+                    {{Delivery.Tax(class="radio_tax",id="check_tax",onclick="taxCheck();",value="tax")}}
+                    {{Delivery.Tax.label}}
+                    <label for="check_tax" class="radio_tax_toggle" id="taxCheck">
+                        <span>&#10003;</span>
+                    </label>
+                    <div class="fill_req_tax">
+                        <div class="tax_name">
+                            {{Delivery.Tax_company.label}}
+                            {{Delivery.Tax_company(class="text_form_input")}}
+                        </div>
+                        <div class="tax_num">
+                            {{Delivery.Tax_payer.label}}
+                            {{Delivery.Tax_payer(class="text_form_input", maxlength="12")}}
+                        </div>
+                        <div class="tax_add">
+                            {{Delivery.Tax_location.label}}
+                            {{Delivery.Tax_location(class="text_form_input")}}
+                        </div>
+                    </div>
+                </div>
+                <div class="send_toMe">
+                    {{Delivery.owner(class="radio_def_add",id="sendMe",onclick="toMeCheck();",value="self")}}
+                    {{Delivery.owner.label}}
+                    <label for="sendMe" class="radio_def_add_toggle send_to_me" id="checkForMe">
+                        <span>&#10003;</span>
+                    </label>
+                </div>
+
+                <div class="send_other" id="fill_send">
+                    {{Delivery.other(class="radio_other_add",id="sendYou",onclick="toOtherCheck();",value="other")}}
+                    {{Delivery.other.label}}
+                    <label for="sendYou" class="radio_other_add_toggle" id="checkForYou">
+                        <span>&#10003;</span>
+                    </label>
+                    <div class="fill_other_address">
+                        <div class="sec_email">
+                            {{Delivery.email2.label}}
+                            {{Delivery.email2(class="text_form_input")}}
+                        </div>
+                        <div class="sec_name">
+                            {{Delivery.fname2.label}}
+                            {{Delivery.fname2(class="text_form_input")}}
+                            <div class="sub_sec4">
+                                {{Delivery.lname2.label}}
+                                {{Delivery.lname2(class="text_form_input")}}
+                            </div>
+                        </div>
+                        <div class="sec_add">
+                            {{Delivery.address2.label}}
+                            {{Delivery.address2(class="text_form_address2")}}
+                        </div>
+                        <div class="scope_1">
+                            {{Delivery.province2.label}}
+                            {{Delivery.province2(class="text_form_select", id="other_province")}}
+                            <div class="sub_sec5">
+                                {{Delivery.district2.label}}
+                                {{Delivery.district2(class="text_form_select", id="other_district")}}
+                            </div>
+                        </div>
+                        <div class="scope_2">
+                            {{Delivery.subDistrict2.label}}
+                            {{Delivery.subDistrict2(class="text_form_select", id="other_subDistrict")}}
+                            <div class="sub_sec6">
+                                {{Delivery.postcode2.label}}
+                                {{Delivery.postcode2(class="text_form_post",maxlength=5)}}
+                            </div>
+                        </div>
+                        <div class="sec_phone">
+                            {{Delivery.telNumber2.label}}
+                            {{Delivery.telNumber2(class="text_form_input",maxlength=10)}}
+                        </div>
+            
+                        <br>
+                    </div>
+                </div>
+                    {{Delivery.submit(class="submit")}}
+                </form>
+        </div> 
+        
+        <div class="pay_step">
+            <img src="{{url_for('static', filename='reference/shipping.svg')}}" class="icon_step" alt="icon">
+            <p class="process one">ที่อยู่จัดส่งสินค้า</p>
+            
+            <img src="{{url_for('static', filename='reference/bill.svg')}}" class="icon_step" alt="icon">
+            <p class="process two">ชำระเงิน</p>
+            
+            <img src="{{url_for('static', filename='reference/accepted.svg')}}" class="icon_step" alt="icon">
+            <p class="process three">ยืนยันการสั่งซื้อ</p>
+        </div>
+    </div>
+</div>
+
+<script src="{{url_for('static', filename='Javascripts/disable_checkbox_&_switch_btn.js')}}"></script>
+<script src="{{url_for('static', filename='Javascripts/custom_checkbox_shippig.js')}}"></script>
+<script src="{{url_for('static', filename='Javascripts/fetch_Api.js')}}"></script>
+<script src="{{url_for('static', filename='Javascripts/SumOrder.js')}}"></script>
+       
+{% endblock%}

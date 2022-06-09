@@ -1,0 +1,89 @@
+/* background */
+body
+{
+    background-color: #FBFCE4;
+}
+
+/* Logo */
+.logos
+{
+    background-color: #E3BB4F;
+    padding: 10px 795px 10px;
+    margin: -10px -8px;
+}
+
+.logos h1
+{   
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 36px;
+}
+.logos span
+{   
+    border-top: 2px solid #000000;
+    text-align: center;
+    font-size: 24px;
+    padding: 7px 0;
+    font-weight: 50;
+}
+
+.logos a
+{   
+    color: #000000; 
+    text-decoration: none;
+}
+
+main
+{
+    z-index: 1;
+}
+
+/* cart */
+.navbar ul li .cart
+{
+    background: none;
+    position: relative;
+    top: 65px;
+    right: -133px;
+    border: 0;
+    border-radius: 100px;
+    padding: 5px 10px 5px;
+}
+
+.navbar ul li .cart a img
+{
+    width: 100px;
+    cursor: pointer;
+}
+
+/* Bottom */
+.bottom 
+{
+    background-color: #fbfce4;
+    margin: 100px 5% 0;
+    overflow: hidden; 
+    height: 100px;
+    bottom: 0; 
+    width: 90%;
+    display: flex;
+    border-top: 3px solid #6F7007;
+}
+ 
+.bottom a
+{   
+      
+    color: #6f7007; 
+    text-decoration: none;
+    margin: 0 130px;
+    font-size: 18px;
+}
+
+.bottom a:hover
+{
+    color: #940505;
+}
+
+.bottom h4
+{
+    padding: 0 50px;
+}

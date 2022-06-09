@@ -1,0 +1,30 @@
+{% extends "Layout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+
+{% endfor %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/for_ForgotPassword.css')}}">
+<div class="get_back"><a href="{{url_for('login')}}" class="Link"><- Go back</a></div>
+<div class="content">
+    <div class="title">
+        Retrieve Account
+    </div>
+    <span>
+        Please fill your Email:
+    </span>
+    <form  method="POST">
+        {{sendMail.hidden_tag()}}
+        <div class="form">
+            {{sendMail.email(class="login_text")}}
+        </div>         
+        <br>
+        {{ sendMail.submit(class="login_button", value="Submit")}}
+    </form>
+{% endblock%}

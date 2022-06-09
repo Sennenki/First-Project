@@ -1,0 +1,155 @@
+<!-- {% if current_user.is_authenticated %}
+            <a class="btn_fx" id="user_profile">
+                <img  src="{{url_for('static', filename='Upload/' + current_user.proflie_pic)}}" class="user_pic"  alt="">
+            </a>
+            <div class="User_profile">
+                <div class="User_profile_border">
+                    {% if current_user.is_authenticated %}
+                        <img src="{{url_for('static', filename='Upload/' + current_user.proflie_pic)}}" alt="Profile">
+                    {% else %}
+                        <img src="{{url_for('static', filename='reference/user.svg')}}" alt="Profile">
+                    {% endif %}
+                </div>
+                <div class="User_attribute">
+                    <div class="User_name">
+                        <p>{{current_user.fname}} {{current_user.lname}}</p>
+                        <span>{{current_user.email}}</span>
+                    </div>
+                    <div class="btn_stuff">
+                        <a  href="{{url_for('MemberProfile', command='view')}}">
+                            <button class="User_btn">Change Profile</button>
+                        </a>
+                        <a  href="{{url_for('logout')}}">
+                            <button class="User_btn">Logout</button>
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- {% else %} -->
+
+            <!-- {% endif %} -->
+
+            <!-- {% if countCart %}
+                <span class="cart_count"> {{countCart}} </span>
+            {% else %}
+                <span class="cart_count" style="display: none;" ></span>
+            {% endif %} -->
+
+            <div class="fill_form">
+                <form method="POST">
+                    {{Delivery.hidden_tag()}}
+                    <div class="sec_email">
+                        {{Delivery.email.label}}
+                        {{Delivery.email(class="text_form_input")}}
+                    </div>
+                    <div class="sec_name">
+                        {{Delivery.fname.label}}
+                        {{Delivery.fname(class="text_form_input")}}
+                        <div class="sub_sec1">
+                            {{Delivery.lname.label}}
+                            {{Delivery.lname(class="text_form_input")}}
+                        </div>
+                    </div>
+                    <div class="sec_add">
+                        {{Delivery.address.label}}
+                        {{Delivery.address(class="text_form_address")}}
+                    </div>
+                    <div class="scope_1">
+                        {{Delivery.province.label}}
+                        {{Delivery.province(class="text_form_select", id="province")}}
+                        <div class="sub_sec2">
+                            {{Delivery.district.label}}
+                            {{Delivery.district(class="text_form_select", id="district")}}
+                        </div>
+                    </div>
+                    <div class="scope_2">
+                        {{Delivery.subDistrict.label}}
+                        {{Delivery.subDistrict(class="text_form_select", id="subDistrict")}}
+                        <div class="sub_sec3">
+                            {{Delivery.postcode.label}}
+                            {{Delivery.postcode(class="text_form_post",maxlength=5)}}
+                        </div>
+                    </div>
+                    <div class="sec_phone">
+                        {{Delivery.phone.label}}
+                        {{Delivery.phone(class="text_form_input",maxlength=10)}}
+                    </div>
+                    <div class="want_tax" id="fill_tax">
+                        {{Delivery.req_tax(class="radio_tax",id="check_tax",onclick="taxCheck();",value="tax")}}
+                        {{Delivery.req_tax.label}}
+                        <label for="check_tax" class="radio_tax_toggle" id="taxCheck">
+                            <span>&#10003;</span>
+                        </label>
+                        <div class="fill_req_tax">
+                            <div class="tax_name">
+                                {{Delivery.t_name.label}}
+                                {{Delivery.t_name(class="text_form_input")}}
+                            </div>
+                            <div class="tax_num">
+                                {{Delivery.t_num.label}}
+                                {{Delivery.t_num(class="text_form_input", maxlength="12")}}
+                            </div>
+                            <div class="tax_add">
+                                {{Delivery.t_loc.label}}
+                                {{Delivery.t_loc(class="text_form_input")}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="send_toMe">
+                        {{Delivery.send_user(class="radio_def_add",id="sendMe",onclick="toMeCheck();",value="self")}}
+                        {{Delivery.send_user.label}}
+                        <label for="sendMe" class="radio_def_add_toggle send_to_me" id="checkForMe">
+                            <span>&#10003;</span>
+                        </label>
+                    </div>
+    
+                    <div class="send_other" id="fill_send">
+                        {{Delivery.send_other(class="radio_other_add",id="sendYou",onclick="toOtherCheck();",value="other")}}
+                        {{Delivery.send_other.label}}
+                        <label for="sendYou" class="radio_other_add_toggle" id="checkForYou">
+                            <span>&#10003;</span>
+                        </label>
+                        <div class="fill_other_address">
+                            <div class="sec_email">
+                                {{Delivery.sndEmail.label}}
+                                {{Delivery.sndEmail(class="text_form_input")}}
+                            </div>
+                            <div class="sec_name">
+                                {{Delivery.sndFname.label}}
+                                {{Delivery.sndFname(class="text_form_input")}}
+                                <div class="sub_sec4">
+                                    {{Delivery.sndLname.label}}
+                                    {{Delivery.sndLname(class="text_form_input")}}
+                                </div>
+                            </div>
+                            <div class="sec_add">
+                                {{Delivery.sndAddress.label}}
+                                {{Delivery.sndAddress(class="text_form_address2")}}
+                            </div>
+                            <div class="scope_1">
+                                {{Delivery.sndProvince.label}}
+                                {{Delivery.sndProvince(class="text_form_select", id="other_province")}}
+                                <div class="sub_sec5">
+                                    {{Delivery.sndDistrict.label}}
+                                    {{Delivery.sndDistrict(class="text_form_select", id="other_district")}}
+                                </div>
+                            </div>
+                            <div class="scope_2">
+                                {{Delivery.sndSubDistrict.label}}
+                                {{Delivery.sndSubDistrict(class="text_form_select", id="other_subDistrict")}}
+                                <div class="sub_sec6">
+                                    {{Delivery.sndPostcode.label}}
+                                    {{Delivery.sndPostcode(class="text_form_post",maxlength=5)}}
+                                </div>
+                            </div>
+                            <div class="sec_phone">
+                                {{Delivery.sndPhone.label}}
+                                {{Delivery.sndPhone(class="text_form_input",maxlength=10)}}
+                            </div>
+                
+                            <br>
+                        </div>
+                    </div>
+                        {{Delivery.submit(class="submit")}}
+                </form>
+            </div>

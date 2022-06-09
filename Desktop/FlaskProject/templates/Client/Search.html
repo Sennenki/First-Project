@@ -1,0 +1,57 @@
+{% extends "Layout.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_Search.css')}}">
+<div class="title">Result <span>{{countItem}} Item</span> </div>
+<div class="container">
+    {% if current_user.is_authenticated %}
+        {% for listItem in listItem %}
+            {% if listItem.product_deal %}
+                <div class="card promote">
+            {% else %}
+                <div class="card">
+            {% endif %}
+                    <img loading = "lazy" src="{{ url_for('static', filename = 'Upload/' + listItem.product_images ) }}" alt="Image">
+                    <span>{{listItem.product_name}}</span>
+                    <span>{{listItem.product_price}} THB</span>
+                    <form method="POST" action="/MemberSearch/add_{{listItem.product_id}}">
+                        {{order.hidden_tag()}}
+                        {{order.submit(class="Picker", value="Add to Cart")}}
+                    </form>
+                    <form method="POST" action="/MemberSearch/like_{{listItem.product_id}}">
+                        {{order.flavorite(class="flavorite", id="heart", value="")}}
+                        <label for="heart" class="flavorite_lable"></label> 
+                        {% for flavoriteItem in flavoriteItem %}
+                            {% if flavoriteItem.product_code == listItem.product_code %}
+                                    {{order.flavorite(class="flavorite like", id="heart", value="")}}
+                                    <label for="heart" class="flavorite_lable like"></label> 
+                            {% endif %}
+                        {% endfor %}
+                    </form>
+                    <span>{{listItem.product_deal}}</span>
+                </div>
+            {% endfor %}
+    {% else %}
+        {% for listItem in listItem %}
+            {% if listItem.product_deal %}
+                <div class="card promote">
+            {% else %}
+                <div class="card">
+            {% endif %}
+                    <img loading = "lazy" src="{{ url_for('static', filename = 'Upload/' + listItem.product_images ) }}" alt="Image">
+                    <span>{{listItem.product_name}}</span>
+                    <span>{{listItem.product_price}} THB</span>
+                    <form method="POST" action="{{url_for('login')}}">
+                        {{order.submit(class="Picker", value="Add to Cart")}}
+                    </form>
+                    <form method="POST" action="{{url_for('login')}}">
+                        {{order.hidden_tag()}}
+                        {{order.flavorite(class="flavorite", id="heart", value="")}}
+                        <label for="heart" class="flavorite_lable"></label> 
+                    </form>
+                    <span>{{listItem.product_deal}}</span>
+                </div>
+        {% endfor %}
+    {% endif %}
+{% endblock%}

@@ -1,0 +1,39 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+
+{% endfor %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_LogIns.css')}}">
+<div class="content">
+    <div class="get_back"><a href="{{url_for('Home')}}" class="Link"><- Go back</a></div>
+    <h2> New member?<a href="{{url_for('Register')}}" class="goSignup">Sign up Here</a></h2>
+    <div class="login_box">
+        <div class="picture"><img src="" alt="Picture"></div>
+        <div class="login_form"  >
+            <form method="POST">
+                {{form.hidden_tag()}}
+                <div class="form-group">
+                    <label ><h3>{{form.email.label}}</h3></label>
+                    {{form.email(class="login_text")}}  {{getUser}}
+                </div>         
+                <br>        
+                <div class="form-group">
+                    <label ><h3>{{form.password.label}}</h3></label>
+                    {{form.password(class="login_text")}} {{getPassword}}
+                </div>
+                <a href="#" class="forget">Forget password?</a>
+
+                <div class="form-group">
+                    {{ form.submit(class="login_button")}}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock%}

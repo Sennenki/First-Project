@@ -1,0 +1,130 @@
+/* ===================
+    appearence 
+=================== */
+
+:root{
+    --clr-primary: #FBFCE4;
+    --clr-secondary: #E3BB4F;
+    --clr-third: #AF8A1C;
+    --clr-blc: #000;
+    
+    --fs-big: 2.5em;
+    --fs-sml: 0.7em;
+    --fs-nav: 1.4em;
+
+}
+
+/* ===================
+  remove navbar 
+=================== */
+
+.navbar {
+    display: none;
+}
+
+
+/* ===================
+  remove cart button 
+=================== */
+
+.Cart {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* ===================
+  set content position
+=================== */
+ 
+
+.content {
+    position: relative;
+    margin-left: 8em;
+}
+
+/* ===================
+  set login link to conner
+=================== */
+
+
+.content h2 {
+    position: absolute;
+    right: 10em;
+}
+
+/* ===================
+  set login link & FX
+=================== */
+
+.goLogin {
+    position: relative;
+    margin-left: 0.5em;
+
+    text-decoration: none;
+    color: var(--clr-third);
+}
+
+.goLogin::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2em;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: var(--clr-third);
+    transform: scaleX(0);
+}
+
+.goLogin:hover::after {
+    transform: scaleX(1);
+}
+
+/* ===================
+    title form 
+=================== */
+
+.welcome {
+    position: absolute;
+    top: 2em;
+    left: 15em;
+    margin: 0;
+    
+    color: var(--clr-third);
+    font-size: 36px;
+}
+
+.username {
+    position: absolute;
+    top: 5em;
+    left: 52ch;
+    margin: 0;
+
+    font-size: 24px;
+}
+
+
+.pass {
+    position: absolute;
+    top: 0.7em;
+    left: 2.5em;
+    margin: 0;
+    padding: 0.01em 0.3em;
+
+    font-size: 16em;
+    color: var(--clr-primary);
+
+    background: var(--clr-secondary);
+    border-radius: 50%;
+}
+
+.noti {
+    position: absolute;
+    top: 24em;
+    left: 32em;
+    margin: 0;
+
+    color: var(--clr-third);
+    font-size: var(--fs-nav);
+}

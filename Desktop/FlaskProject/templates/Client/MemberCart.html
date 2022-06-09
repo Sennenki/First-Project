@@ -1,0 +1,72 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_memberCarts.css')}}">
+<div class="get_back"><a href="{{url_for('Member', input=current_user.email)}}" class="Link"><- Go back</a></div>
+<div class="CartPage">
+    <div class="path" >
+        <p>Hompage > Cart</p>
+    </div>
+    <div class="cart_list" >
+        <header class="table-name">
+            Your cart 
+            <span class="amount-item"> ( {{counter}} items)</span>
+            <span>
+                <a href="{{url_for('DeleteItem', input=current_user.email)}}">
+                    <img class="delete_all" src="{{url_for('static' , filename='reference/trash.svg')}}" alt="">
+                </a>    
+            </span>
+        </header>
+        <table class="head-record">
+            <tr class="table-head">
+                <th class="table-head-name col_1">Product Name</th>
+                <th class="table-head-name col_2">Price</th>
+                <th class="table-head-name col_3">Quantity</th>
+                <th class="table-head-name col_4">Total</th>
+            </tr>
+        </table>
+        <div class="list_item">
+            {% for item in userCart %}
+                <div class="product-record">
+                    {% if item.sequence %2 == 1 %}
+                        <div class="product-picture row">
+                    {% else %}
+                    <div class="product-picture ">
+                    {% endif %}
+                        <img src="{{url_for('static', filename='Product_IMG/'+ item.file)}}" alt="image">
+                    </div>
+                    <div class="product-description center">
+                        {{item.name}}
+                    </div>
+                    <div class="product-price center" id="price">
+                         {{item.price}} THB
+                    </div>
+                    <div class="product-amount center">
+                        <a href="{{url_for('RemoveItem', input=current_user.email, id=item.id)}}">
+                            <button type="button" class="btn_adjust" id="remove"> - </button>
+                        </a>
+                        <p id="list_num">{{item.amount}}</p>
+                        <a href="{{url_for('AddItem', input=current_user.email, id=item.id)}}">
+                            <button type="button" class="btn_adjust" id="more"> + </button>
+                        </a>
+                    </div>
+                    <div class="product-total center" id="result"> {{item.price * item.amount}} THB </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="summary">
+        <h2 class="title">Order Summary</h2>
+        <p class="descripition">Subtotal <span id="all_price">$$$ THB</span></p>
+        <p class="descripition">shipping <span id="shipping_price">100  THB</span></p>
+        <p class="total_price">TOTAL</p>
+        <h1 class="amount_price">  <span id="amount_price">$$$</span> THB</h1>
+        <a href="{{url_for('Informationt', input=current_user.email)}}">
+            <button class="btn_payment">Submit</button>
+        </a>    
+    </div>
+</div>
+
+<script src="{{url_for('static', filename='Javascripts/calculate_price.js')}}"></script>
+       
+{% endblock%}

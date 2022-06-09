@@ -1,0 +1,145 @@
+<div class="logo">
+    <div class="btn">
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('Member', input=current_user.email)}}" class="Cart_link">
+        {% else %}
+            <a href="{{url_for('Home')}}">
+        {% endif %}
+            <img src="{{url_for('static', filename = 'reference/InternLogo.png')}}" class="Logo" alt="">
+        </a>
+    </div>
+    
+</div>
+<div class="navbar">
+    <ul class="navbar-menu">
+        <li class="list-item">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+        </li>
+        <li class="navbar-menu-items">
+            {% if current_user.is_authenticated %}
+                <a class="btn_fx" href="{{url_for('Member', input=current_user.email)}}#all_product" class="Cart_link">
+            {% else %}
+                <a class="btn_fx" href="{{url_for('Home')}}#all_product">
+            {% endif %}
+                <p class="drop">
+                    Rice 
+                </p>
+            </a>
+        <li class="navbar-menu-items">
+            {% if current_user.is_authenticated %}
+                <a class="btn_fx" href="{{url_for('Member', input=current_user.email)}}#promotion_zone" class="Cart_link">
+            {% else %}
+                <a class="btn_fx" href="{{url_for('Home')}}#promotion_zone">
+            {% endif %}
+                <p>
+                    Promotion
+                </p>
+            </a>
+        </li>
+        <li class="navbar-menu-items">
+            {% if current_user.is_authenticated %}
+                <a class="btn_fx" href="{{url_for('Member', input=current_user.email)}}#box_set_zone" class="Cart_link">
+            {% else %}
+                <a class="btn_fx" href="{{url_for('Home')}}#box_set_zone">
+            {% endif %}
+                <p>
+                    Box set
+                </p>
+            </a>
+        </li>
+        <li class="navbar-menu-items">
+            {% if current_user.is_authenticated %}
+                <a class="btn_fx" href="{{url_for('Member', input=current_user.email)}}#preOrder_zone" class="Cart_link">
+            {% else %}
+                <a class="btn_fx" href="{{url_for('Home')}}#preOrder_zone">
+            {% endif %}
+                <p>
+                    Pre-Order
+                </p>    
+            </a>
+        </li>
+        <li class="navbar-menu2">
+            <a class="btn_fx" href="#" >
+                <img src="{{url_for('static', filename = 'reference/heart.svg')}}" class="heart"  alt="">
+            </a>
+        </li>
+        <li class="profile_btn" >
+            {% if current_user.is_authenticated %}
+                <a class="btn_fx" id="user_profile">
+                    {% if current_user.file %}
+                        <img  src="{{url_for('static', filename='Product_IMG/' + current_user.file)}}" class="user_pic"  alt="Profile">
+                    {% else %}
+                        <img src="{{url_for('static', filename='reference/user.svg')}}" alt="Profile">
+                    {% endif %}
+                </a>
+                <div class="User_profile">
+                    <div class="User_profile_border">
+                        {% if current_user.file %}
+                            <img src="{{url_for('static', filename='Product_IMG/' + current_user.file)}}" alt="Profile">
+                        {% else %}
+                            <img src="{{url_for('static', filename='reference/user.svg')}}" alt="Profile">
+                        {% endif %}
+                    </div>
+                    <div class="User_attribute">
+                        <div class="User_name">
+                            <p>{{current_user.fname}} {{current_user.lname}}</p>
+                            <span>{{current_user.email}}</span>
+                        </div>
+                        <div class="btn_stuff">
+                            <a  href="{{url_for('Profile', input=current_user.email)}}">
+                                <button class="User_btn">Change Profile</button>
+                            </a>
+                            <a  href="{{url_for('Logout')}}">
+                                <button class="User_btn">Logout</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <a class="btn_fx" href="{{url_for('Login')}}" >
+                    <img src="{{url_for('static', filename = 'reference/user.svg')}}" class="user"  alt="">
+                </a>
+            {% endif %}
+            
+        </li>
+        <li>
+            <a  class="btn_fx" href="#" >
+                <img src="{{url_for('static', filename = 'reference/language.svg')}}" class="lang" alt="">
+            </a>
+        </li>
+        <div class="search-bar">
+            {% if allowSearch %}
+                {% if current_user %}
+                    <form method="POST" action="{{url_for('loggedSearchItem', input=current_user.email)}}">
+                {% else %}
+                    <form method="POST" action="{{url_for('SearchItem')}}">
+                {% endif %}
+                        {{findItem.hidden_tag()}}
+                        <span class="line"></span>
+                        {{findItem.search(class="search_input", placeholder="Search here")}}
+                        {{findItem.submit(class="search_button", id="Search", value="")}}
+                        <label for="Search">
+                            <img src="{{url_for('static', filename = 'reference/search.svg')}}" class="search_sign" alt="">
+                        </label>
+                    </form>
+            {% endif %}
+        </div>
+    </ul>
+    <div class="Cart">
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('Cart', input=current_user.email)}}" class="Cart_link">
+        {% else %}
+            <a href="{{url_for('Login')}}" class="Cart_link">
+        {% endif %}
+            <img src="{{url_for('static', filename = 'reference/cart.svg')}}" alt="">
+            {% if counter %}
+                <span class="cart_count"> {{counter}} </span>
+            {% else %}
+                <span class="cart_count" style="display: none;" ></span>
+            {% endif %}
+        </a>
+        </div>
+</div>

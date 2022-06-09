@@ -1,0 +1,105 @@
+{% extends "Admin/AdminLayout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+{% endfor %}
+<style>
+  .custom {
+    padding: 0.3rem 4rem;
+  }
+  
+  .custom2 {
+    padding: 0.3rem 2rem;
+  }
+
+  .pic {
+    object-fit: cover;
+    width: 3em;
+    height: 3em;
+
+    border-radius: 50%;
+    background-color: rgb(128, 128, 128, 0.2);
+
+    cursor: pointer;
+  }
+</style>
+
+<div class="container-fluid">
+    <h1 class="my-3 fw-border">Customer</h1>
+
+    <form method="POST" action="{{url_for('AddCustomer')}}">
+      {{dataUser.hidden_tag()}}
+      <div class="shadow p-3 mb-3 bg-light rounded">
+        <div class="row">
+          <div class="col-3">
+            {{dataUser.fname.label}}
+            {{dataUser.fname(class="form-control")}}
+          </div>
+          <div class="col-3">
+            {{dataUser.lname.label}}
+            {{dataUser.lname(class="form-control")}}
+          </div>
+          <div class="col-3">
+            {{dataUser.email.label}}
+            {{dataUser.email(class="form-control")}}
+          </div>
+          <div class="col-3">
+            {{dataUser.password.label}}
+            {{dataUser.password(class="form-control")}}
+          </div>
+          <div class="col-2">
+            <br>
+            {{dataUser.submit(value="Submit",class="btn btn-success custom")}}
+          </div>
+        </div>
+      </div>
+    </form>
+    <h4>All Member</h4>
+    <div class="namelist">
+      <table class="table table-striped ">
+        <tr>
+          <th scope="col" style="text-align: center;">ID</th>
+          <th scope="col" colspan="4" style="text-align: center;">NAME</th>
+          <th scope="col" style="text-align: center;">EMAIL</th>
+          <th scope="col" style="text-align: center;">PASSWORD</th>
+          <th scope="col" style="text-align: center;">IMAGE</th>
+          <th scope="col" style="text-align: center;">OPTION</th>
+        </tr>
+        {% for info in Information %}
+        <tr>
+          <form method="POST" action="{{url_for('UpdateCustomer', input=info.id)}}" enctype="multipart/form-data">
+            <td scope="row" class="align-middle col-1" style="text-align: center;">{{info.id}}</td>
+            <td class="col-1"></td>
+            <td class="align-middle col-1 " style="text-align: center;">{{dataUser.fname(class="form-control", value=info.fname)}}</td>
+            <td class="align-middle col-1 " style="text-align: center;">{{dataUser.lname(class="form-control", value=info.lname)}}</td>
+            <td class="col-1"></td>
+            <td class="align-middle col-2 " style="text-align: center;">{{dataUser.email(class="form-control", value=info.email)}}</td>
+            <td class="align-middle col-2 " style="text-align: center;">{{dataUser.email(class="form-control", type="text", value=info.encrypt_password)}}</td>
+            <td class="align-middle col-2 " style="text-align: center;">
+              {{dataUser.file(style="position: absolute; opacity: 0;", id="Upload_img")}}
+              <label for="Upload_img">
+                {% if info.file %}
+                  <img class="pic" src="{{url_for('static', filename='Product_IMG/'+ info.file)}}" alt="Img"> 
+                {% else %}
+                  <img class="pic" src="{{url_for('static', filename='reference/user.svg')}}" alt="Img"> 
+                {% endif %}
+              </label>
+            </td>
+            <td class="align-middle col-2 " style="text-align: center;">
+              {{dataUser.submit(value="Update",class="btn btn-warning custom2")}}
+              <a href="{{url_for('DeleteCustomer', input=info.id)}}">
+                <input class="btn btn-danger" type="button" value="Delete">
+              </a>
+            </td>
+          </form>
+        </tr>
+        {% endfor %}
+           </table>
+    </div>
+</div>
+{% endblock%}  

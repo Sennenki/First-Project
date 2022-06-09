@@ -1,0 +1,65 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+  <div class="alert" id="alert">
+    <strong>{{ message }}</strong> Please try again.
+    <button type="button" class="btn-close" onclick="clickNClose();"></button>
+  </div>  
+{% endfor %}
+
+{% if state %}
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_reg_Succes_.css')}}">
+<div class="content">
+    <h2>Already have account?<a href="{{url_for('Login')}}" class="goLogin">Login here</a></h2>
+    <h1 class="welcome">Welcome to KHAWSANNAHMOR</h1>
+    <h2 class="username">
+        {{ fname }} {{ lname }}
+    </h2>
+    
+    <h1 class="pass">&#10003;</h1>
+    <h5 class="noti">Sign up successfully.</h5>
+</div> 
+{% else %}
+<link rel="stylesheet" href="{{url_for('static', filename='CSS/for_regIster.css')}}">
+<div class="content">
+  <h2 >Already have account?<a href="{{url_for('Login')}}" class="goLogin">Login here</a></h2>
+  <div class="register_box">
+    <h2 class="create">Create your Account</h2>
+      <form class="register_form" method="POST">
+        {{form.hidden_tag()}}
+        <div class="label_form">
+          <label class="label_text"><h4>{{form.fname.label}}</h4></label>
+          <label class="label_text"><h4>{{form.lname.label}}</h4></label>
+          <label class="label_text"><h4>{{form.email.label}}</h4></label>
+          <label class="label_text"><h4>{{form.password.label}}</h4></label>
+          <label class="label_text"><h4>{{form.conpassword.label}}</h4></label>
+        </div>
+        <div class="text_form">
+          {{form.fname(class="text_form_input")}}
+          {{form.lname(class="text_form_input")}}
+          {{form.email(class="text_form_input")}}
+          {{form.password(class="text_form_input")}}
+          {{form.conpassword(class="text_form_input")}}
+        </div>
+        <div class="checkbox">
+          <p class="Check_acp">
+          {{form.accept(class="check",id="check_toggle",onclick="Onchecked();")}} {{form.accept.label}}
+          <label for="check_toggle" class="check_toggle_label" id="customCheck">
+            <span>&#10003;</span>
+          </label>
+          </p>
+        </div>
+        <div class="register_buttom">
+          {{ form.submit(class="button")}}
+        </div>
+      </form>
+  </div>  
+</div>
+{% endif %}
+
+<script src="{{url_for('static', filename='Javascripts/custom_checkbox_register.js')}}"></script>
+    
+      
+{% endblock%}

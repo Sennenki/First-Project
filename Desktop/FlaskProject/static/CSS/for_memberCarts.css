@@ -1,0 +1,289 @@
+:root{
+    --clr-primary: #FBFCE4;
+    --clr-secondary: #E3BB4F;
+    --clr-third: #AF8A1C;
+    --clr-blc: #000;
+    
+    --fs-big: 2.5em;
+    --fs-sml: 0.7em;
+    --fs-nav: 1.4em;
+}
+
+.Cart {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.CartPage {
+    position: relative;
+    left: 5em;
+}
+
+.path, .cart_list {
+    position: absolute;
+    left: 5em;
+
+    color: var(--clr-third);
+}
+
+.path {
+    top: 1.5em;
+}
+
+.cart_list {
+    top: 4em;
+}
+
+.table-name {
+    font-size: var(--fs-big);
+}
+
+.amount-item {
+    padding-left: 1em;
+
+    font-size: calc(var(--fs-big) - 1.75em);
+    color: var(--clr-blc);
+}
+
+.delete_all_btn {
+    position: absolute;
+    opacity: 0;
+}
+
+.delete_all{
+    position: absolute;
+    top: 0.2em;
+    right: 1em;
+
+    width: 1em;
+
+    cursor: pointer;
+}
+
+.delete_all:hover{
+    width: 1.2em;
+    transform: translatex(4px)
+                translateY(-8px);
+}
+
+.table-head {
+    position: relative;
+    top: 0;
+    padding: 1em 2em;
+
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 19em repeat(3, 4.5em);
+    
+    font-size:  calc(var(--fs-big) - 1em) ;
+
+    background: var(--clr-primary);
+    z-index: 2;
+}
+
+.table-head::before,
+.table-head::after {
+    content: '';
+    position: absolute;
+
+    height: 0.2em;
+    width: calc(100% - 1.25em) ;
+
+    background: var(--clr-third);
+    opacity: 0.6;
+    z-index: 3;
+}
+
+.table-head::before {
+    top: 3.25em;
+}
+
+.list_item {
+    overflow-y: auto;
+    height: 22em;
+    width: 98.5%;
+}
+
+.product-record {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 7em 24em repeat(3, 7em);
+
+    height: 7em;
+    width: 57.5em;
+}
+
+
+.product-record > * {
+    padding: 0.5em;
+
+    color: var(--clr-blc);
+    text-align: center;
+}
+
+.product-picture {
+    position: relative;
+
+    width: 10em;
+    height: 6em;
+}
+
+.product-picture > img {
+    inline-size: 43%;
+    
+    aspect-ratio: 3 / 4;
+    
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+.product-picture.row::after {
+    content: '';
+    position: absolute;
+    top: -0.1em; 
+    left: 0;
+
+    width: 57.5em;
+    height: 6.9em;
+
+    background-color: var(--clr-secondary);
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.product-amount > * {
+    position: relative;
+}
+
+.product-amount > *:nth-child(1) {
+    top: 2.15em;
+    left: -2em;
+}
+
+.product-amount > *:nth-child(3) {
+    top: -2.15em;
+    left: 2em;
+}
+
+.product-amount > a {
+    text-decoration: none;
+} 
+
+.center {
+    position: relative;
+    inset: 0;
+    margin: auto;
+}
+
+.input {
+    width: 1em;
+    padding-left: 0.5em;
+}
+
+.summary {
+    position: absolute;
+    top: 5.5em;
+    right: 22.5em;
+    
+    padding: 0.5em 2em;
+    
+    border: 4px solid var(--clr-third);
+    border-radius: 15px;
+    box-shadow: 20px 20px 30px -22px var(--clr-blc);
+}
+
+.title {
+    position: relative;
+
+    padding: 0 2em 1em;
+
+    color: var(--clr-third);
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: 0.9em; 
+    left: 1.95em;
+    height: 2px;
+    width: 12.5ch;
+    background: var(--clr-third);
+}
+
+.descripition {
+    padding: 0 0 1em;
+}
+
+.descripition span{
+    margin-left: 9em;
+}
+
+.total_price {
+    position: relative;
+
+    margin-top: 5em;
+
+    font-weight: 700;
+    color: var(--clr-third);
+}
+
+.total_price::after {
+    content: '';
+    position: absolute;
+    top: -0.5em; 
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--clr-third);
+}
+
+.amount_price {
+    margin-left: 3em;
+}
+
+.amount_price span {
+    margin-right: 1.5em;
+}
+
+.btn_adjust {
+    --_size: 1em;
+    width: 1.5em;
+    height: --_size;
+
+    color: var(--clr-primary);
+    font-size: --_size;
+    font-weight: 600;
+
+    background-color: var(--clr-third);
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+}
+
+.btn_payment {
+    padding: 1em 5em;
+
+    text-align: center;
+    font-size: var(--fs-nav);
+    
+
+    background: var(--clr-secondary);
+    border-radius: 20px;
+    border: 0;
+    cursor: pointer;
+}
+
+
+.btn_payment:hover {
+    filter: brightness(120%);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 5px -10px var(--clr-blc);
+}
+
+.btn_payment.lock:hover {
+    filter: brightness(100%);
+    transform: translateY(0px);
+    box-shadow: 0 0 0 0 var(--clr-blc);
+}

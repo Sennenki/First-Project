@@ -1,0 +1,345 @@
+{% extends "Client/Layout.html" %}
+
+{% block content %}
+
+{% if accept %}
+
+<link rel="stylesheet" href="{{url_for('static', filename = 'CSS/for_Confirm_Pay.css')}}">
+<div class="payment">
+    <div class="path">
+        <p>Hompage > Cart > Payment</p>
+    </div>
+    <div class="method_form">
+        
+        <div class="title">
+            
+            <h2 class="head">
+                <span class="icon_check">
+                    &#10003;
+                </span>
+                แจ้งชำระเงินเรียบร้อยแล้ว
+            </h2>
+            <h4 class="foot">
+                ข้อมูลการแจ้งชำระเงิน
+                <span class="serial">
+                    ใบสั่งซื้อเลขที่  <u>{{order_bill.serial}}</u>
+                </span>
+            </h4>
+            
+        </div>
+        <div class="detail">
+            <div class="datetimeNow">
+                <p>แจ้งชำระเงินเมื่อ: </p>
+                <p class="data">{{order_bill.date_log}}</p>
+            </div>
+            <div class="navAccount">
+                <p>บัญชีปลายทาง: </p>
+                {% if order_bill.select_choices == 'KTB' %}
+                <p class="data_bank"><img src="{{url_for('static', filename = 'reference/KTB Logo.svg')}}" alt="logo">
+                    <span class="bank_title">ธนาคารกรุงไทย สาขาเซนทรัลพลาซ่า เชียงราย</span>
+                    <span>เลขที่บัญชี 222-2-22222-2</span> <br>
+                    <span>ชื่อบัญชี นายจันทร์ หนวดเขี้ยว</span> 
+                </p>
+                {% elif order_bill.select_choices == 'SCB' %}
+                <p class="data_bank"><img src="{{url_for('static', filename = 'reference/SCB Logo.svg')}}" alt="logo">
+                    <span class="bank_title">ธนาคารไทยพาณิชย์ สาขาเซนทรัลพลาซ่า เชียงราย</span> 
+                    <span>เลขที่บัญชี 222-2-33333-2</span> <br>
+                    <span>ชื่อบัญชี นายจันทร์ หนวดเขี้ยว</span> 
+                </p>
+                {% elif order_bill.select_choices == 'KSK' %}
+                <p class="data_bank"><img src="{{url_for('static', filename = 'reference/KSK Logo.svg')}}" alt="logo">
+                    <span class="bank_title">ธนาคารกสิกร สาขาเซนทรัลพลาซ่า เชียงราย</span> 
+                    <span>เลขที่บัญชี 444-4-22222-2</span> <br>
+                    <span>ชื่อบัญชี นายจันทร์ หนวดเขี้ยว</span>
+                </p>
+                {% elif order_bill.select_choices == 'BBL' %}
+                <p class="data_bank"><img src="{{url_for('static', filename = 'reference/BBL Logo.svg')}}" alt="logo">
+                    <span class="bank_title">ธนาคารกรุงเทพ สาขาเซนทรัลพลาซ่า เชียงราย</span> 
+                    <span>เลขที่บัญชี 086-8889999</span> <br>
+                    <span>ชื่อบัญชี นายจันทร์ หนวดเขี้ยว</span>
+                </p>
+                {% endif %}
+            </div>
+            <div class="payDate">
+                <p>วันที่ชำระเงิน:  </p>
+                <p class="data">{{order_bill.date}}</p>
+            </div>
+            <div class="payTime">
+                <p>เวลา (โดยประมาณ):  </p>
+                <p class="data">{{order_bill.time}} น.</p>
+            </div>
+            <div class="Amount">
+                <p>จำนวนเงิน:  </p>
+                <p class="data">{{order_bill.cost}} บาท</p>
+            </div>
+            <div class="evidence">
+                <p>หลักฐานการโอน:  </p>
+                {% if order_bill.file %}
+                
+                <u class="viewFile">
+                    <p id="viewPic">ไฟล์แนบ</p> 
+                    <div class="show_img">
+                        <img id="fileImg" src="{{ url_for('static', filename = 'Product_IMG/' + order_bill.file ) }}" alt="Image">
+                        <div class="closeimg">
+                            <button type="button" id="btn-close" class="btn-close"></button>
+                        </div>
+                    </div>
+                </u>
+
+                {% else %}
+                <u class="viewFile">Can't open image.</u>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="pay_step">
+            <img src="{{url_for('static', filename = 'reference/shipping.svg')}}" class="icon_step first" alt="icon">
+            <p class="process one">ที่อยู่จัดส่งสินค้า</p>
+            
+            <img src="{{url_for('static', filename = 'reference/bill.svg')}}" class="icon_step second" alt="icon">
+            <p class="process two">ชำระเงิน</p>
+            
+            <img src="{{url_for('static', filename = 'reference/accepted.svg')}}" class="icon_step third" alt="icon">
+            <p class="process three">ยืนยันการสั่งซื้อ</p>
+        </div>
+        <table>
+            <tr>
+                <th>วันที่สั่งซื้อสินค้า</th>
+                <th>เลขที่สินค้า</th>
+                <th>รายการสินค้า</th>
+                <th>ราคา</th>
+            </tr>
+            <tr>
+                <td rowspan="{{ countOrder }}">
+                    {{order_bill.date_log}}
+                </td>
+            {% for order in userCart %}
+                    <td class="product-description col_two">
+                        {{order.code}}
+                    </td>
+                    <td class="product-description ">
+                        {{order.name}}
+                    </td>
+                    <td style="display: none;" class="col_four">{{order.amount}}</td>
+                    <td class="product-description col_five">{{order.price}} บาท</td>
+                </tr>
+                {% endfor %}
+            <tr>
+                <td class="whiteSpace" colspan="3"> + ค่าขนส่ง 100 บาท </td>
+                <td class="sumAll" id="sumAll"> ราคารวม   $$$   บาท  </td>
+            </tr>
+        </table>
+        <a href="{{url_for('SendOrder', input=current_user.email)}}">
+            <button class="back_home">กลับหน้าหลัก</button>
+        </a>
+    </div>
+</div>
+
+{% else %}
+
+<link rel="stylesheet" href="{{url_for('static', filename = 'CSS/for_Payment_Method.css' )}}">
+<div class="payment">
+    <div class="path">
+        <p>Hompage > Cart > Payment</p>
+    </div>
+    <div class="method_form">
+        <div class="order_sum">
+            <h2 class="order_sum_title">Order Summary</h2>
+            <table class="order_sum_list">
+                {% for order in userCart %}
+                <tr>
+                    <td class="product-picture col_one">
+                        <img src="{{url_for('static', filename = 'Product_IMG/' + order.file )}}" alt="image">
+                    </td>
+                    <td class="product-description col_two">
+                        {{order.name}}
+                    </td>
+                    <td class="product-description col_four">
+                        {{order.amount}}
+                    </td>
+                    <td class="product-description col_five">{{order.price}} บาท</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2"> + shipping 100  THB</td>
+                    <td colspan="2" id="sumAll"> TOTAL $$$ THB </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form_title">
+            <h2>แจ้งชำระเงิน</h2>
+            <span>หากท่านเป็นสมาชิก โปรดเข้าสู่ระบบก่อนแจ้งชำระเงิน</span>
+        </div>
+        <div class="payment_info">
+            <div class="method_used">
+                <div class="method_used_title">
+                    <h2><u>รายละเอียดการโอนเงิน</u></h2>
+                </div>
+                <div class="method_used_choices">
+                    <form action="{{url_for('GetPayment', input=current_user.email)}}" method="POST" enctype="multipart/form-data">
+                        {{payment.hidden_tag()}}
+                        <h4>บัญชีที่โอนเงิน:</h4>
+                        <div class="choose_bank">
+                            <table>
+                                <tr>
+                                    <td>
+                                        {{payment.select_choices(class="circleCheck", id="aCheck", value="KTB", onclick="circleToggle();")}}
+                                        <label for="aCheck" class="toggle" id="KTB">
+                                            <span>&#10003;</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <img src="{{url_for('static', filename = 'reference/KTB Logo.svg')}}" alt="logo">
+                                        <span>ธนาคารกรุงไทย</span>
+                                    </td>
+                                    <td>
+                                        <span>222-2-22222-2</span>
+                                    </td>
+                                    <td>
+                                        <span>นายจันทร์ หนวดเขี้ยว</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{payment.select_choices(class="circleCheck", id="bCheck", value="SCB", onclick="circleToggle();")}}
+                                        <label for="bCheck" class="toggle" id="SCB">
+                                            <span>&#10003;</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <img src="{{url_for('static', filename = 'reference/SCB Logo.svg')}}" alt="logo">
+                                        <span>ธนาคารไทยพาณิชย์</span>
+                                    </td>
+                                    <td>
+                                        <span>222-2-33333-2</span> 
+                                    </td>
+                                    <td>
+                                        <span>นายจันทร์ หนวดเขี้ยว</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{payment.select_choices(class="circleCheck", id="cCheck", value="KSK", onclick="circleToggle();")}}
+                                        <label for="cCheck" class="toggle" id="KSK">
+                                            <span>&#10003;</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <img src="{{url_for('static', filename = 'reference/KSK Logo.svg')}}" alt="logo">
+                                        <span>ธนาคารกสิกร</span>
+                                    </td>
+                                    <td>
+                                        <span>444-4-22222-2</span>
+                                    </td>
+                                    <td>
+                                        <span>นายจันทร์ หนวดเขี้ยว</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{payment.select_choices(class="circleCheck", id="dCheck", value="BBL", onclick="circleToggle();")}}
+                                        <label for="dCheck" class="toggle" id="BBL">
+                                            <span>&#10003;</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <img src="{{url_for('static', filename = 'reference/BBL Logo.svg')}}" alt="logo">
+                                        <span>ธนาคารกรุงเทพ</span>
+                                    </td>
+                                    <td>
+                                        <span>086-8889999</span> 
+                                    </td>
+                                    <td>
+                                        <span>นายจันทร์ หนวดเขี้ยว</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="date">
+                            {{payment.date.label}}
+                            {{payment.date(class="inputText")}}
+                        </div>
+                        <div class="time">
+                            <p>
+                                {{payment.time.label}}
+                                {{payment.time(class="inputText")}} น. 
+                            </p>
+                        </div>
+                        <div class="amount_cost">
+                            {{payment.cost.label}}
+                            {{payment.cost(class="inputText")}} บาท
+                        </div>
+                        <div class="payment_proof">
+                            {{payment.file.label}}
+                            {{payment.file()}}
+                        </div>
+                        <div class="serial_order">
+                            {{payment.serial.label}}
+                            {{payment.serial(class="inputText")}}
+                        </div>
+                        <div class="description">
+                            {{payment.description.label(class="areaLabel")}}
+                            {{payment.description(class="inputArea")}}
+                        </div>
+                    </div>
+                    <div class="Who_pay">
+                        <h2><u>รายละเอียดผู้แจ้งชำระเงิน</u></h2>
+                        <div class="pay_name">
+                            {{payment.name.label}}
+                            {% if owner %}
+                                <p id="payInfo" style="display: none;">{{owner.name}}</p>
+                            {% else %}
+                                <p id="payInfo" style="display: none;"></p>
+                            {% endif %}
+                            {{payment.name(class="Who_pay_text")}}
+                        </div>
+                        <div class="pay_email">
+                            {{payment.email.label}}
+                            {% if owner %}
+                                <p id="payEmail" style="display: none;">{{owner.email}}</p>
+                            {% else %}
+                                <p id="payEmail" style="display: none;"></p>
+                            {% endif %}
+                            {{payment.email(class="Who_pay_text")}}
+                        </div>
+                        <div class="pay_phone">
+                            {{payment.phone.label}}
+                            {% if owner %}
+                                <p id="payPhone" style="display: none;">{{owner.telephone}}</p>
+                            {% else %}
+                                <p id="payPhone" style="display: none;"></p>
+                            {% endif %}
+                            {{payment.phone(class="Who_pay_text",maxlength="10")}}
+                        </div>
+                    </div> 
+                    <p class="warning_label">***กรุณาตรวจสอบข้อมูลของท่านให้ถูกต้องอีกครั้ง ก่อนกดยืนยันการแจ้งชำระเงิน***</p>
+                        {{payment.submit(class="submit")}}
+                    </form>
+                {% for eachone in test %}
+                    {{eachone.id}} / {{eachone.name}} / {{eachone.email}} / {{eachone.telephone}} / {{eachone.select_choices}}  <br>
+                    {{eachone.date}} / {{eachone.time}} / {{eachone.cost}} / {{eachone.file}} / {{eachone.serial}}/ {{eachone.description}} <br>
+                    //////////////////////////////////////////////////////////<br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="pay_step">
+            <img src="{{url_for('static', filename = 'reference/shipping.svg')}}" class="icon_step first" alt="icon">
+            <p class="process one">ที่อยู่จัดส่งสินค้า</p>
+
+            <img src="{{url_for('static', filename = 'reference/bill.svg')}}" class="icon_step second" alt="icon">
+            <p class="process two">ชำระเงิน</p>
+
+            <img src="{{url_for('static', filename = 'reference/accepted.svg')}}" class="icon_step third" alt="icon">
+            <p class="process three">ยืนยันการสั่งซื้อ</p>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+<script src="{{url_for('static', filename='Javascripts/custom_checkbox_bank.js')}}"></script>
+<script src="{{url_for('static', filename='Javascripts/View_picture.js')}}"></script>
+<script src="{{url_for('static', filename='Javascripts/SumOrder.js')}}"></script> 
+<script src="{{url_for('static', filename='Javascripts/User_Payment.js')}}"></script> 
+       
+{% endblock%}

@@ -1,0 +1,416 @@
+:root{
+    --clr-primary: #FBFCE4;
+    --clr-secondary: #E3BB4F;
+    --clr-third: #AF8A1C;
+    --clr-blc: #000;
+    
+    --fs-big: 2.5em;
+    --fs-sml: 0.7em;
+    --fs-nav: 1.4em;
+}
+
+.Cart {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.payment {
+    position: relative;
+    margin-left: 8em;
+}
+
+.path {
+    position: absolute;
+    left: 4em;
+
+    color: var(--clr-third);
+}
+
+.form_title {
+    position: absolute;
+    top: 4em;
+    left: 5em;
+
+    font-size: var(--fs-nav);
+    color: var(--clr-third);
+}
+
+.fill_form {
+    position: relative;
+    top: 10em;
+    left: 10em;
+    margin-bottom: 14em;
+
+    width: 55em;
+
+    line-height: 3em;
+    color: var(--clr-blc);
+}
+
+.sec_email {
+    margin-left: 2.1em;
+}
+
+.sec_add,
+.scope_1 {
+    margin-left: 1em;
+}
+
+.scope_1,
+.scope_2 {
+    position: relative;
+}
+
+.sub_sec1,
+.sub_sec2,
+.sub_sec3,
+.sub_sec4,
+.sub_sec5,
+.sub_sec6 {
+    position: absolute;
+    top: 0em;
+}
+
+.sub_sec1 {
+    top: 3em;
+    left: 24.95em;
+}
+
+.sub_sec4 {
+    top: 4em;
+    left: 26.95em;
+}
+
+.sub_sec2,
+.sub_sec5 {
+    left: 25.4em;
+}
+
+.sub_sec3,
+.sub_sec6 {
+    left: 25.4em;
+}
+
+.sec_phone {
+    margin-left: -1.5em;
+}
+
+.want_tax,
+.send_toMe,
+.send_other {
+    position: relative;
+    left: 3em;
+}
+
+.want_tax,
+.send_other {
+    margin-bottom: 0;
+}
+
+.want_tax.fill_tax {
+    margin-bottom: 12em;
+}
+
+.send_other.fill_send {
+    margin-bottom: 17em;
+}
+
+.text_form_input,
+.text_form_address,
+.text_form_address2,
+.text_form_post  {
+    padding-left: 1.5em;
+
+    width: 20em;
+    height: 2em;
+
+    border: 1px solid var(--clr-third);
+    border-radius: 5px;
+    outline: none;
+}
+
+.text_form_address {
+    width: 49.5em;
+}
+
+.text_form_address2 {
+    width: 49.75em;
+}
+
+.text_form_post {
+    padding-left: 1em;
+    width: 4em;
+}
+
+.text_form_select {
+    padding-left: 1.5em;
+    width: 21.5em;
+    height: 2em;
+    
+    background: var(--clr-primary); 
+    border: 1px solid var(--clr-third);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px -2px;
+    cursor: pointer;
+}
+
+.fill_req_tax,
+.fill_other_address {
+    position: absolute;
+    left: 5em;
+    padding: 1em;
+
+    border: 2px solid var(--clr-third);
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px -2px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.tax_name {
+    margin-left: 1em;
+}
+
+.tax_num {
+    margin-left: 0.75em;
+}
+
+.fill_other_address {
+    top: -3em;
+    padding-left: 2em;
+
+    height: 18em;
+    width: 50em;
+}
+
+.radio_tax_toggle.req_tax +
+.fill_req_tax {
+    opacity: 1;
+    visibility: visible;
+}
+
+.radio_other_add_toggle.send_to_other +
+.fill_other_address{
+    top: 3em;
+    
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ===================
+  custom checkbox
+=================== */
+
+.radio_tax,
+.radio_def_add,
+.radio_other_add {
+    position: relative;
+    opacity: 0;
+}
+
+.radio_tax_toggle,
+.radio_def_add_toggle,
+.radio_other_add_toggle  {
+    position: absolute;
+    top: 0;
+    left: -1em;
+    height: 3em;
+    
+    display: flex;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+/* ===================
+  change custom checkbox 
+=================== */
+
+.radio_tax_toggle span,
+.radio_def_add_toggle span,
+.radio_other_add_toggle span {
+    --size-box: 1em;
+    height: var(--size-box);
+    width: var(--size-box);
+    
+    display: block;
+
+    color: var(--clr-primary);
+    text-align: center;
+    line-height: 1em;
+    font-size: 1.5em;
+    
+    border: 2px solid var(--clr-third);
+    border-radius: 5px;
+}
+
+/* ===================
+  custom checkbox when checked
+=================== */
+
+.radio_tax_toggle.req_tax span,
+.radio_def_add_toggle.send_to_me span,
+.radio_other_add_toggle.send_to_other span {
+    color: var(--clr-primary);
+
+    background: var(--clr-third);
+}
+
+.radio_def_add_toggle.send_to_me span {
+    opacity: 0.3;
+}
+
+.submitTax,
+.submit {
+    position: relative;
+    left: 12em;
+    margin: 1em;
+    padding: 0.5em 5em;
+    
+    font-weight: bolder;
+    font-size: var(--fs-nav);
+    color: var(--clr-primary);
+
+    background: var(--clr-secondary);
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+}
+
+.submitTax {
+    left: 1.35em;
+    top: 0;
+}
+
+.submit {
+    top: 3em;
+    left: 10em;
+}
+
+.submitTax:focus,
+.submitTax:hover,
+.submit:focus,
+.submit:hover {
+    filter: brightness(110%);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 5px -10px var(--clr-blc);
+    outline: none;
+}
+
+.order_sum {
+    position: sticky;
+    top: 15em;
+    right: 5em;
+
+    float: right;
+
+    color: var(--clr-third);
+    text-align: center;
+
+    border: 3px solid;
+    border-radius: 30px;
+    box-shadow: 0 3px 3px 1px var(--clr-blc);
+}
+
+.order_sum_title {
+    position: relative;
+}
+
+.underline{
+    text-decoration-thickness: 3px;
+}
+
+.order_sum_list {
+    padding: 0.3em 0.5em 1em;
+}
+
+.order_sum_list > tbody > tr > td {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.product-picture.col_one {
+    position: relative;
+
+    width: 5em;
+    height: 2em;
+}
+
+.product-picture > img {
+    inline-size: 40%;
+    
+    aspect-ratio: 3 / 4;
+    
+    object-fit: cover;
+
+    border: 1px solid var(--clr-secondary);
+    border-radius: 10%;
+}
+
+.pay_step {
+    position: absolute;
+    top: 2em;
+    left: 29em;
+    display: flex;
+    gap: 1em;
+}
+
+.pay_step > p {
+    position: relative;
+    padding: 0.5em 1em 0.5em 2.5em;
+    
+    border: 2px solid var(--clr-third);
+    border-radius: 50px;
+}
+.icon_step {
+    position: relative;
+    left: 3.5em;
+
+    width: 2em;
+
+    z-index: 1;
+}
+
+.icon_step ~ .icon_step {
+    position: relative;
+    left: 3.5em;
+
+    width: 2em;
+    
+    filter: invert(52%) 
+            sepia(76%) 
+            saturate(434%) 
+            hue-rotate(7deg) 
+            brightness(90%) 
+            contrast(96%);
+
+    z-index: 1;
+}
+
+.one {
+    background: var(--clr-secondary);
+}
+
+.one::after {
+    content: '';
+    position: absolute;
+    top: 1em;
+    left: 10em;
+
+    width: 4.2em;
+    height: 0.1em;
+
+    background: var(--clr-third);
+}
+.two::after {
+    content: '';
+    position: absolute;
+    top: 1em;
+    left: 7em;
+
+    width: 4.2em;
+    height: 0.1em;
+
+    background: var(--clr-third);
+}
